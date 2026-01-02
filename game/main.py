@@ -11,6 +11,7 @@ except ImportError:
         )
     print("Installed, attempting to start again...")
     import pygame
+import math
 
 print("Running...")
 pygame.init()
@@ -30,6 +31,9 @@ c = pygame.time.Clock()
 Tileset = pygame.image.load("assets/tileset.png")
 BG_TILE = Tileset.subsurface((0, 0), (32, 32))
 
+realx, realy = 0, 0
+x, y = 0, 0
+
 run = True
 while run:
     for ev in pygame.event.get():
@@ -37,14 +41,38 @@ while run:
           (ev.type == pygame.KEYDOWN and ev.key == pygame.K_ESCAPE):
             run = False
 
-    for x in range(MAP.get_width(), MainSur.get_width()+32, 32):
-        for y in range(0, MainSur.get_height()+32, 32):
-            MainSur.blit(BG_TILE, (x, y))
-    for y in range(MAP.get_height(), MainSur.get_height()+32, 32):
-        for x in range(0, MAP.get_width(), 32):
-            MainSur.blit(BG_TILE, (x, y))
-    MainSur.blit(MAP, (0, 0))
-    WIN.blit(pygame.transform.scale(MainSur, WIN.get_size()), (0, 0))
+    inps = pygame.key.get_pressed()
+    dx, dy = 0, 0
+    if inps[pygame.K_UP]:
+        dy -= 1
+    if inps[pygame.K_DOWN]:
+        dy += 1
+    if inps[pygame.K_LEFT]:
+        dx -= 1
+    if inps[pygame.K_RIGHT]:
+        dx += 1
+    if dy != 0:
+        realy -= dy
+        y = math.floor(realy)
+    if dx != 0:
+        realx -= dx
+        x = math.floor(realx)
+
+    for x1 in range(x%32-32, x+32, 32):
+        for y1 in range(y%32-32, MainSur.get_height()+32, 32):
+            MainSur.blit(BG_TILE, (x1, y1))
+    for x1 in range(MAP.get_width()+x, MainSur.get_width()+32, 32):
+        for y1 in range(y%32-32, MainSur.get_height()+32, 32):
+            MainSur.blit(BG_TILE, (x1, y1))
+    for y1 in range(y%32-32, y+32, 32):
+        for x1 in range(x, MAP.get_width()+32*2, 32):
+            MainSur.blit(BG_TILE, (x1, y1))
+    for y1 in range(MAP.get_height()+y, MainSur.get_height()+32, 32):
+        for x1 in range(x%32-32, MAP.get_width()+32*2, 32):
+            MainSur.blit(BG_TILE, (x1, y1))
+    MainSur.blit(MAP, (x, y))
+    WIN.blit(pygame.transform.scale(MainSur, WIN.get_size()),
+             (realx%1 * (WIN.get_width()/scale) * 16, realy%1 * (WIN.get_height()/MainSur.get_height()) * 16))
     pygame.display.update()
     c.tick(60)
 
