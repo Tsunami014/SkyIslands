@@ -1,0 +1,69 @@
+{
+    "recipes": [
+        {
+            "tags": ["shape=flat", "shape=flat", "shape=flat"],
+            "output": {
+                "shape": "box"
+            }
+        }, {
+            "tags": ["shape=shaft", "shape=shaft", "shape=shaft"],
+            "output": {
+                "shape": "flat"
+            }
+        }
+    ],
+    "items": {
+        "apple": {
+            "type": "resource",
+            "desc": "A plump red apple",
+            "tags": {
+                "food": true,
+                "colour": "red",
+                "shape": "round"
+            }
+        },
+        "pear": {
+            "type": "resource",
+            "desc": "A sky-warmed pear",
+            "tags": {
+                "food": true,
+                "colour": "yellow",
+                "shape": "misshapen"
+            }
+        },
+        "stick": {
+            "type": "resource",
+            "desc": "A stick found lying on the ground",
+            "tags": {
+                "shape": "shaft",
+                "material": "wooden"
+            }
+        },
+        "rock": {
+            "type": "resource",
+            "desc": "A simple rock found on the ground",
+            "tags": {
+                "shape": "misshapen",
+                "material": "stone"
+            }
+        },
+        "board": {
+            "type": "resource",
+            "desc": "A flat wooden board",
+            "tags": {
+                "shape": "flat",
+                "material": "wooden"
+            }
+        },
+        "wooden box": {
+            "type": "combined",
+            "items": ["board", "board", "board"]
+        }
+    },
+    "colours": {
+        "red": "#FB9955",
+        "yellow": "#EFDF55",
+        "wooden": "#653F2D",
+        "stone": "#777777"
+    }
+}
