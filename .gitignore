@@ -1,0 +1,2 @@
+game/map/**/*.png
+!**/_composite.png
