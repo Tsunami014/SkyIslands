@@ -80,21 +80,22 @@ texture = ExtResource("2_r0du0")
 script = ExtResource("5_fos0i")
 csv_path = "res://map/simplified/Level_0/TopTiles.csv"
 
-[node name="Tree2" type="Area2D" parent="Island1"]
+[node name="Tree" type="Area2D" parent="Island1"]
 position = Vector2(127, 18)
 script = ExtResource("5_trn2v")
 
-[node name="Img" type="Sprite2D" parent="Island1/Tree2"]
+[node name="Img" type="Sprite2D" parent="Island1/Tree"]
 material = SubResource("ShaderMaterial_wkp8b")
 texture = ExtResource("4_lgr22")
 region_enabled = true
 region_rect = Rect2(0, 0, 32, 32)
 
-[node name="Collision" type="CollisionPolygon2D" parent="Island1/Tree2"]
+[node name="Collision" type="CollisionPolygon2D" parent="Island1/Tree"]
 position = Vector2(-1, 0)
 polygon = PackedVector2Array(-6, 3, -7, 10, -13, 17, 13, 17, 8, 6, 18, -2, 18, -9, 7, -17, -2, -17, -11, -10, -11, -2)
 
 [node name="Player" type="CharacterBody2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(80, 70)
 motion_mode = 1
 script = ExtResource("3_cm0pq")
@@ -109,5 +110,5 @@ shape = SubResource("RectangleShape2D_20pc6")
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(-1, 1)
 
-[connection signal="body_entered" from="Island1/Tree2" to="Island1/Tree2" method="_on_body_entered"]
-[connection signal="body_exited" from="Island1/Tree2" to="Island1/Tree2" method="_on_body_exited"]
+[connection signal="body_entered" from="Island1/Tree" to="Island1/Tree" method="_on_body_entered"]
+[connection signal="body_exited" from="Island1/Tree" to="Island1/Tree" method="_on_body_exited"]

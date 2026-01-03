@@ -1,10 +1,12 @@
 extends Area2D
+@export var item: String
+var done: bool = false
 
 func _on_body_entered(body):
-	if body is Player:
+	if (not done) and body is Player:
 		_setColour(Color(0.549, 0.563, 0.0, 1.0))
 func _on_body_exited(body):
-	if body is Player:
+	if (not done) and body is Player:
 		_setColour(Color(0.0, 0.0, 0.0, 1.0))
 
 func _setColour(col: Color):
@@ -15,6 +17,12 @@ func _setColour(col: Color):
 func _ready() -> void:
 	pass
 
-
 func _process(_delta: float) -> void:
-	pass
+	if (not done) and Input.is_action_just_pressed("collect"):
+		var bodies = get_overlapping_bodies()
+		for body in bodies:
+			if body is Player:
+				done = true
+				%Player.items.append(item)
+				_setColour(Color(0.0, 0.0, 0.0, 1.0))
+				$Img.region_rect.position.x += $Img.region_rect.size.x

@@ -2,6 +2,7 @@ extends CharacterBody2D
 class_name Player
 
 @export var speed = 80 # pixels/sec
+@export var items: Array = []
 
 func _ready() -> void:
 	pass
