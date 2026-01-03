@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Player
 
 @export var speed = 80 # pixels/sec
 
@@ -6,7 +7,7 @@ func _ready() -> void:
 	pass
 
 func _physics_process(_delta):
-	var input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+	var input_dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	velocity = input_dir * speed
 
 	if velocity.length() > 0:

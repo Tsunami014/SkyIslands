@@ -18,3 +18,7 @@
 - Realised that the past 4-5 hours of work was not logged due to wakatime issues in Godot (never used it before) (I'm mad because it never said anything!)
 
 ![Godot screenshot](./journalPics/d3.png)
+
+# 4/1/25
+- Fixed collisions
+- Added the first collectable - an apple with an apple tree!

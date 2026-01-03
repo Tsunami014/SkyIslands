@@ -34,11 +34,10 @@ func merge_poly_array_to(merged : PackedVector2Array, toMerge: Array) -> PackedV
 	return merged
 
 func get_tile_poly(x, y) -> PackedVector2Array:
-	var offset = Vector2(8, 8)
-	var tl = Vector2(x,   y)   * 16 - offset
-	var tr = Vector2(x+1, y)   * 16 - offset
-	var br = Vector2(x+1, y+1) * 16 - offset
-	var bl = Vector2(x,   y+1) * 16 - offset
+	var tl = Vector2(x,   y)   * 16
+	var tr = Vector2(x+1, y)   * 16
+	var br = Vector2(x+1, y+1) * 16
+	var bl = Vector2(x,   y+1) * 16
 
 	return PackedVector2Array([tl, tr, br, bl])
 
