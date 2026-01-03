@@ -54,10 +54,9 @@ size = Vector2(14, 14)
 
 [node name="Parallax2D" type="Parallax2D" parent="."]
 repeat_size = Vector2(32, 32)
-repeat_times = 10
-screen_offset = Vector2(160, 90)
+repeat_times = 25
 
-[node name="Tileset" type="Sprite2D" parent="Parallax2D"]
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D"]
 texture = ExtResource("1_uu6xs")
 region_enabled = true
 region_rect = Rect2(0, 0, 32, 32)
@@ -78,6 +77,9 @@ centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 shape = SubResource("RectangleShape2D_20pc6")
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+offset = Vector2(8, 8)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
