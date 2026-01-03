@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://bhnednmpbc5cx"]
+
+[ext_resource type="Texture2D" uid="uid://u2axh15ykh4q" path="res://assets/tileset.png" id="1_uu6xs"]
+[ext_resource type="Texture2D" uid="uid://t0evi82ilswy" path="res://map/simplified/Level_0/_composite.png" id="2_r0du0"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Parallax2D" type="Parallax2D" parent="."]
+repeat_size = Vector2(32, 32)
+repeat_times = 10
+screen_offset = Vector2(160, 90)
+
+[node name="Tileset" type="Sprite2D" parent="Parallax2D"]
+texture = ExtResource("1_uu6xs")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 32)
+
+[node name="Composite" type="Sprite2D" parent="."]
+position = Vector2(128, 128)
+texture = ExtResource("2_r0du0")

@@ -1,2 +1,5 @@
-game/map/**/*.png
-!**/_composite.png
+game/.godot/
+/android/
+
+game/map/**/*.png*
+!**/_composite.png*
