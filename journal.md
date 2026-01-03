@@ -7,5 +7,4 @@
 - Made the ldtk map auto export for usage soon
 - Added a `main.py` with almost nothing in it
 # 3/1/25
-- Added the start to the item data
-- Added the basic game rendering, player movement and collision
+- Started working on the game in python. Got pretty far, with a total of 2hr 45min so far. Then realised I couldn't use Python and started working in Godot. Ignore that plz.
