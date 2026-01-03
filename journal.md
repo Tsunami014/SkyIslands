@@ -8,4 +8,4 @@
 - Added a `main.py` with almost nothing in it
 # 3/1/25
 - Added the start to the item data
-- Added the basic camera stuff
+- Added the basic game rendering, player movement and collision

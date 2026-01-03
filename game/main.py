@@ -17,9 +17,12 @@ print("Running...")
 pygame.init()
 
 MAP = None
+COLLISIONS = None
 def loadMap(name):
-    global MAP
+    global MAP, COLLISIONS
     MAP = pygame.image.load(f"map/simplified/{name}/_composite.png")
+    with open(f"map/simplified/{name}/TopTiles.csv") as f:
+        COLLISIONS = [[i!="0" for i in ln.split(",") if i] for ln in f.readlines()]
 loadMap("Level_0")
 
 WIN = pygame.display.set_mode()
@@ -40,6 +43,15 @@ realx, realy = 0, 0
 x, y = 0, 0
 dir = True
 
+def check(dx, dy):
+    cx, cy = -x + dx + MainSur.get_width()/2, -y + dy + MainSur.get_height()/2
+    def check2(x1, y1):
+        x1, y1 = math.floor(x1/16), math.floor(y1/16)
+        if x1 < 0 or y1 < 0 or y1 >= len(COLLISIONS) or x1 >= len(COLLISIONS[y1]):
+            return False
+        return COLLISIONS[y1][x1]
+    return check2(cx-7, cy-7) and check2(cx+7, cy+8) and check2(cx-7, cy+8) and check2(cx+7, cy-7)
+
 run = True
 while run:
     for ev in pygame.event.get():
@@ -59,15 +71,16 @@ while run:
         dx += 1
     if dx != 0 or dy != 0:
         playerAnim = (playerAnim + 1) % (3*playerAnimSpeed)
-        if dy != 0:
+        if dy != 0 and check(0, dy):
             realy -= dy
             y = math.floor(realy)
         if dx != 0:
-            realx -= dx
-            x = math.floor(realx)
             dir = dx > 0
+            if check(dx, 0):
+                realx -= dx
+                x = math.floor(realx)
     else:
-        playerAnim = 0
+        playerAnim = playerAnimSpeed-1
 
     for x1 in range(x%32-32, x+32, 32):
         for y1 in range(y%32-32, MainSur.get_height()+32, 32):
