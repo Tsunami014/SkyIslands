@@ -14,7 +14,7 @@ func _ready() -> void:
 				if line[x] == "0":
 					toMerge.append(get_tile_poly(x, y))
 		y += 1
-	
+
 	var outPoly := PackedVector2Array(toMerge[0])
 	var attempts := 100
 	while !toMerge.is_empty() and (attempts > 0):

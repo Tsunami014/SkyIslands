@@ -13,7 +13,8 @@
 
 # 3/1/25
 - Added a player picture!
-- Started working on the game in python. Got pretty far, with a total of 2hr 45min so far. Then realised I couldn't use Python and started working in Godot. Ignore that plz.
-- Got a moving player
+- Started working on the game in python. Got pretty far, with a total of 2hr 45min so far (including the small amount of time writing this docs and the slightly larger amoutn working on the data.json file). Then realised I couldn't use Python and started working in Godot.
+- Got a moving player and scrolling background!
+- Realised that the past 4-5 hours of work was not logged due to wakatime issues in Godot (never used it before) (I'm mad because it never said anything!)
 
 ![Godot screenshot](./journalPics/d3.png)
