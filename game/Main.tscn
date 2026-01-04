@@ -10,9 +10,6 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wkp8b"]
 shader = ExtResource("5_03owx")
-shader_parameter/outline_color = Color(0, 0, 0, 1)
-shader_parameter/blink_color = Color(1, 1, 1, 1)
-shader_parameter/blink_time_scale = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3dxm6"]
 atlas = ExtResource("4_fos0i")
@@ -75,9 +72,40 @@ script = ExtResource("5_fos0i")
 level_name = "Level_0"
 metadata/_custom_type_script = "uid://knrt8ut8vw04"
 
-[node name="Tree" type="Area2D" parent="Map"]
-position = Vector2(127, 18)
+[node name="Rock" type="Area2D" parent="Map"]
+position = Vector2(49, 87)
 script = ExtResource("5_trn2v")
+item = "rock"
+hide = true
+
+[node name="Img" type="Sprite2D" parent="Map/Rock"]
+material = SubResource("ShaderMaterial_wkp8b")
+texture = ExtResource("4_lgr22")
+region_enabled = true
+region_rect = Rect2(64, 0, 16, 16)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/Rock"]
+polygon = PackedVector2Array(-8, 0, -8, 5, 0, 8, 4, 8, 8, 4, 8, -1, 2, -8, -3, -8)
+
+[node name="Rock2" type="Area2D" parent="Map"]
+position = Vector2(60, 54)
+script = ExtResource("5_trn2v")
+item = "rock"
+hide = true
+
+[node name="Img" type="Sprite2D" parent="Map/Rock2"]
+material = SubResource("ShaderMaterial_wkp8b")
+texture = ExtResource("4_lgr22")
+region_enabled = true
+region_rect = Rect2(80, 0, 16, 16)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/Rock2"]
+polygon = PackedVector2Array(-2, -6, -7, 1, -8, 5, -3, 8, 3, 8, 8, 3, 5, -6, 2, -8)
+
+[node name="Tree" type="Area2D" parent="Map"]
+position = Vector2(121, 36)
+script = ExtResource("5_trn2v")
+item = "apple"
 
 [node name="Img" type="Sprite2D" parent="Map/Tree"]
 material = SubResource("ShaderMaterial_wkp8b")
@@ -85,9 +113,24 @@ texture = ExtResource("4_lgr22")
 region_enabled = true
 region_rect = Rect2(0, 0, 32, 32)
 
-[node name="Collision" type="CollisionPolygon2D" parent="Map/Tree"]
-position = Vector2(-1, 0)
-polygon = PackedVector2Array(-6, 3, -7, 10, -13, 17, 13, 17, 8, 6, 18, -2, 18, -9, 7, -17, -2, -17, -11, -10, -11, -2)
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/Tree"]
+position = Vector2(2, 0)
+polygon = PackedVector2Array(1, -16, -7, -15, -13, -9, -13, -2, -6, 4, -9, 7, -9, 12, -14, 16, 8, 16, 4, 7, 14, -4, 14, -8, 9, -13)
+
+[node name="Grass" type="Area2D" parent="Map"]
+position = Vector2(183, 82)
+script = ExtResource("5_trn2v")
+item = "grass"
+hide = true
+
+[node name="Img" type="Sprite2D" parent="Map/Grass"]
+material = SubResource("ShaderMaterial_wkp8b")
+texture = ExtResource("4_lgr22")
+region_enabled = true
+region_rect = Rect2(96, 0, 16, 16)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/Grass"]
+polygon = PackedVector2Array(5, -6, -7, -4, -6, 2, -3, 6, 3, 6, 6, 4)
 
 [node name="Player" type="CharacterBody2D" parent="."]
 unique_name_in_owner = true
@@ -105,5 +148,11 @@ shape = SubResource("RectangleShape2D_20pc6")
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(-1, 1)
 
+[connection signal="body_entered" from="Map/Rock" to="Map/Rock" method="_on_body_entered"]
+[connection signal="body_exited" from="Map/Rock" to="Map/Rock" method="_on_body_exited"]
+[connection signal="body_entered" from="Map/Rock2" to="Map/Rock2" method="_on_body_entered"]
+[connection signal="body_exited" from="Map/Rock2" to="Map/Rock2" method="_on_body_exited"]
 [connection signal="body_entered" from="Map/Tree" to="Map/Tree" method="_on_body_entered"]
 [connection signal="body_exited" from="Map/Tree" to="Map/Tree" method="_on_body_exited"]
+[connection signal="body_entered" from="Map/Grass" to="Map/Grass" method="_on_body_entered"]
+[connection signal="body_exited" from="Map/Grass" to="Map/Grass" method="_on_body_exited"]

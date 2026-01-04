@@ -1,10 +1,10 @@
 // Modified slightly from https://godotshaders.com/shader/lightweight-pixel-perfect-outline/ !
 shader_type canvas_item;
-uniform vec4 outline_color : source_color = vec4(1.0);
+instance uniform vec4 outline_color : source_color = vec4(0.0, 0.0, 0.0, 1.0);
 //Blinking modulates the base color.
 //Set blink_time_scale to 0 if you don't want blinking.
-uniform vec4 blink_color : source_color = vec4(1.0);
-uniform float blink_time_scale : hint_range(0.0, 10.0, 0.1) = 0.0;
+instance uniform vec4 blink_color : source_color = vec4(1.0);
+instance uniform float blink_time_scale : hint_range(0.0, 10.0, 0.1) = 0.0;
 
 void fragment() {
 	vec2 pixel_size = TEXTURE_PIXEL_SIZE;

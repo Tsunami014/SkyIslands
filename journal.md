@@ -2,7 +2,7 @@
 (This is commited the day after, sorry I forgot to yesterday)
 - Worked on my game. Drew lots of nice tiles and made a test map! Have no code yet tho.
 - I've finished probably about half the tiles, and not including the decor. I'll finish the tiles later and work on the decor now so I can start coding soon.
-- My time tracking tool says I have spent 4 hours 53 min and 28 sec so far making assets (this doesn't include making the level, which I have no tracking method for). I hope this counts...
+- My time tracking tool says I have spent 4 hours 53 min and 28 sec so far making assets (uncounted by wakatime) (this doesn't include making the level, which I have no tracking method for). I hope this counts...
 
 ![Tileset](./journalPics/d1tset.png)
 ![Map](./journalPics/d1map.png)
@@ -20,6 +20,10 @@
 ![Godot screenshot](./journalPics/d3.png)
 
 # 4/1/25
+- Added decor and items (time tracker says 5:34 on items and 17:49 on decor)
 - Fixed collisions
-- Added the first collectable - an apple with an apple tree!
+- Added collectables! So far have an apple on a tree, 2 rocks and a bush!
 - Made the map stuff its own node to be easier to use more
+
+![Screenshot of the game working](./journalPics/d4.png)
+
