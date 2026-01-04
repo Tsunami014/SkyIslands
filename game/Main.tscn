@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bhnednmpbc5cx"]
+[gd_scene load_steps=19 format=3 uid="uid://bhnednmpbc5cx"]
 
 [ext_resource type="Texture2D" uid="uid://u2axh15ykh4q" path="res://assets/tileset.png" id="1_uu6xs"]
 [ext_resource type="Script" uid="uid://c0ynf81rkfbyt" path="res://player.gd" id="3_cm0pq"]
@@ -59,7 +59,11 @@ size = Vector2(14, 14)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wkp8b"]
 atlas = ExtResource("8_trn2v")
-region = Rect2(0, 0, 20, 0)
+region = Rect2(20, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_20pc6"]
+atlas = ExtResource("8_trn2v")
+region = Rect2(20, 0, 20, 20)
 
 [node name="Node2D" type="Node2D"]
 
@@ -162,29 +166,28 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_top = 90.0
-offset_bottom = 90.0
+offset_top = 85.0
+offset_bottom = 85.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Hotbar1" type="TextureRect" parent="Player/Camera2D/Container"]
+[node name="Hotbar" type="TextureRect" parent="Player/Camera2D/Container"]
 layout_mode = 0
-offset_left = -27.0
-offset_top = -24.0
-offset_right = -7.0
-offset_bottom = -4.0
+offset_left = -26.0
+offset_top = -20.0
+offset_right = -6.0
 texture = SubResource("AtlasTexture_wkp8b")
 script = ExtResource("9_wkp8b")
+metadata/_custom_type_script = "uid://bpfh1gnb20nrk"
 
 [node name="Hotbar2" type="TextureRect" parent="Player/Camera2D/Container"]
 layout_mode = 0
-offset_left = 7.0
-offset_top = -24.0
-offset_right = 27.0
-offset_bottom = -4.0
-texture = SubResource("AtlasTexture_wkp8b")
+offset_left = 6.0
+offset_top = -20.0
+offset_right = 26.0
+texture = SubResource("AtlasTexture_20pc6")
 script = ExtResource("9_wkp8b")
-index = 1
+metadata/_custom_type_script = "uid://bpfh1gnb20nrk"
 
 [connection signal="body_entered" from="Map/Rock" to="Map/Rock" method="_on_body_entered"]
 [connection signal="body_exited" from="Map/Rock" to="Map/Rock" method="_on_body_exited"]

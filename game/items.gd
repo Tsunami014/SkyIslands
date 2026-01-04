@@ -2,6 +2,8 @@ extends RefCounted
 class_name Items
 
 static var inventory: Array = []
+static var hotbarSel: int = 0
+static var maxHotbar: int = 0
 
 static func getImgRegion(name: String) -> Rect2:
 	var vec = null

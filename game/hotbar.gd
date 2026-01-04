@@ -1,14 +1,21 @@
+@tool
 extends TextureRect
+class_name Hotbar
 
-@export var index: int
+var index: int
 
 func _ready() -> void:
+	if !Engine.is_editor_hint():
+		index = Items.maxHotbar
+		Items.maxHotbar = index + 1
+
+	texture = AtlasTexture.new()
+	texture.atlas = preload("res://assets/gui.png")
+
 	var tex = TextureRect.new()
 	tex.name = "Image"
-	var imgs = AtlasTexture.new()
-	imgs.atlas = preload("res://assets/items.png")
-	imgs.region = Rect2(0, 0, 16, 16)
-	tex.texture = imgs
+	tex.texture = AtlasTexture.new()
+	tex.texture.atlas = preload("res://assets/items.png")
 	tex.set_position(Vector2i(2, 2))
 	add_child(tex)
 	updateImg()
@@ -18,8 +25,10 @@ func _process(_delta: float) -> void:
 	updateImg()
 
 func updateImg() -> void:
+	texture.region = Rect2(20 if Items.hotbarSel == index else 0, 0, 20, 20)
+
 	if Items.inventory.size() <= index:
 		$Image.hide()
 	else:
-		$Image.show()
 		$Image.texture.region = Items.getImgRegion(Items.inventory[index])
+		$Image.show()
