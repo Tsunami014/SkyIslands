@@ -1,7 +1,6 @@
-[gd_scene load_steps=16 format=3 uid="uid://bhnednmpbc5cx"]
+[gd_scene load_steps=15 format=3 uid="uid://bhnednmpbc5cx"]
 
 [ext_resource type="Texture2D" uid="uid://u2axh15ykh4q" path="res://assets/tileset.png" id="1_uu6xs"]
-[ext_resource type="Texture2D" uid="uid://t0evi82ilswy" path="res://map/simplified/Level_0/_composite.png" id="2_r0du0"]
 [ext_resource type="Script" uid="uid://c0ynf81rkfbyt" path="res://player.gd" id="3_cm0pq"]
 [ext_resource type="Texture2D" uid="uid://dpgiaf1dx7oxb" path="res://assets/player.png" id="4_fos0i"]
 [ext_resource type="Texture2D" uid="uid://crlx114upnysu" path="res://assets/decor.png" id="4_lgr22"]
@@ -62,6 +61,7 @@ size = Vector2(14, 14)
 [node name="Node2D" type="Node2D"]
 
 [node name="CloudBg" type="Parallax2D" parent="."]
+z_index = -2
 repeat_size = Vector2(32, 32)
 repeat_times = 25
 
@@ -70,27 +70,22 @@ texture = ExtResource("1_uu6xs")
 region_enabled = true
 region_rect = Rect2(0, 0, 32, 32)
 
-[node name="Island1" type="StaticBody2D" parent="."]
-
-[node name="Image" type="Sprite2D" parent="Island1"]
-position = Vector2(128, 128)
-texture = ExtResource("2_r0du0")
-
-[node name="Collision" type="CollisionPolygon2D" parent="Island1"]
+[node name="Map" type="StaticBody2D" parent="."]
 script = ExtResource("5_fos0i")
-csv_path = "res://map/simplified/Level_0/TopTiles.csv"
+level_name = "Level_0"
+metadata/_custom_type_script = "uid://knrt8ut8vw04"
 
-[node name="Tree" type="Area2D" parent="Island1"]
+[node name="Tree" type="Area2D" parent="Map"]
 position = Vector2(127, 18)
 script = ExtResource("5_trn2v")
 
-[node name="Img" type="Sprite2D" parent="Island1/Tree"]
+[node name="Img" type="Sprite2D" parent="Map/Tree"]
 material = SubResource("ShaderMaterial_wkp8b")
 texture = ExtResource("4_lgr22")
 region_enabled = true
 region_rect = Rect2(0, 0, 32, 32)
 
-[node name="Collision" type="CollisionPolygon2D" parent="Island1/Tree"]
+[node name="Collision" type="CollisionPolygon2D" parent="Map/Tree"]
 position = Vector2(-1, 0)
 polygon = PackedVector2Array(-6, 3, -7, 10, -13, 17, 13, 17, 8, 6, 18, -2, 18, -9, 7, -17, -2, -17, -11, -10, -11, -2)
 
@@ -110,5 +105,5 @@ shape = SubResource("RectangleShape2D_20pc6")
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(-1, 1)
 
-[connection signal="body_entered" from="Island1/Tree" to="Island1/Tree" method="_on_body_entered"]
-[connection signal="body_exited" from="Island1/Tree" to="Island1/Tree" method="_on_body_exited"]
+[connection signal="body_entered" from="Map/Tree" to="Map/Tree" method="_on_body_entered"]
+[connection signal="body_exited" from="Map/Tree" to="Map/Tree" method="_on_body_exited"]

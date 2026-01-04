@@ -22,3 +22,4 @@
 # 4/1/25
 - Fixed collisions
 - Added the first collectable - an apple with an apple tree!
+- Made the map stuff its own node to be easier to use more

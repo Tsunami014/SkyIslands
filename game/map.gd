@@ -1,9 +1,34 @@
-extends CollisionPolygon2D
+@tool
+extends StaticBody2D
+## A Map exported from ldtk
+##
+## Loads the map texture and collisions
+class_name Map
 
-@export_file_path("*.csv") var csv_path
+var tex: Texture2D = null
+@export var level_name: String = "":
+	set(value):
+		level_name = value
+		var path = "res://map/simplified/%s/_composite.png" % level_name
+		if FileAccess.file_exists(path):
+			tex = load(path)
+		else:
+			tex = null
+
+func _get_configuration_warnings() -> PackedStringArray:
+	if not tex:
+		return PackedStringArray(["Level name not found: "+level_name])
+	return PackedStringArray([])
 
 func _ready() -> void:
-	var file = FileAccess.open(csv_path, FileAccess.READ)
+	var spr = Sprite2D.new()
+	spr.name = "Image"
+	spr.texture = tex
+	spr.centered = false
+	spr.z_index = -1
+	add_child(spr)
+
+	var file = FileAccess.open("res://map/simplified/%s/TopTiles.csv" % level_name, FileAccess.READ)
 	var toMerge = []
 
 	var y = 0
@@ -23,7 +48,10 @@ func _ready() -> void:
 	if !toMerge.is_empty():
 		printerr("Failed to merge in all the tiles!")
 
-	polygon = outPoly
+	var coll = CollisionPolygon2D.new()
+	coll.polygon = outPoly
+	coll.name = "Collisions"
+	add_child(coll)
 
 func merge_poly_array_to(merged : PackedVector2Array, toMerge: Array) -> PackedVector2Array:
 	for tilePoly in toMerge:
