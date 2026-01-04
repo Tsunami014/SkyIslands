@@ -3,32 +3,25 @@
         {
             "tags": ["shape=flat", "shape=flat", "shape=flat"],
             "output": {
-                "shape": "box"
+                "shape": "box",
+                "name": "box"
             }
         }, {
             "tags": ["shape=shaft", "shape=shaft", "shape=shaft"],
             "output": {
-                "shape": "flat"
+                "shape": "flat",
+                "name": "raft"
             }
         }
     ],
     "items": {
         "apple": {
             "type": "resource",
-            "desc": "A plump red apple",
+            "desc": "A sky-warmed apple",
             "tags": {
                 "food": true,
                 "colour": "red",
                 "shape": "round"
-            }
-        },
-        "pear": {
-            "type": "resource",
-            "desc": "A sky-warmed pear",
-            "tags": {
-                "food": true,
-                "colour": "yellow",
-                "shape": "misshapen"
             }
         },
         "stick": {
