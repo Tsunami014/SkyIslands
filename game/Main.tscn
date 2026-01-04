@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bhnednmpbc5cx"]
+[gd_scene load_steps=18 format=3 uid="uid://bhnednmpbc5cx"]
 
 [ext_resource type="Texture2D" uid="uid://u2axh15ykh4q" path="res://assets/tileset.png" id="1_uu6xs"]
 [ext_resource type="Script" uid="uid://c0ynf81rkfbyt" path="res://player.gd" id="3_cm0pq"]
@@ -7,6 +7,8 @@
 [ext_resource type="Shader" uid="uid://d2g06mw6eeycg" path="res://outline.gdshader" id="5_03owx"]
 [ext_resource type="Script" uid="uid://knrt8ut8vw04" path="res://map.gd" id="5_fos0i"]
 [ext_resource type="Script" uid="uid://c1lmjrh4mkv4c" path="res://collect.gd" id="5_trn2v"]
+[ext_resource type="Texture2D" uid="uid://wfu8t1vn67h0" path="res://assets/gui.png" id="8_trn2v"]
+[ext_resource type="Script" uid="uid://bpfh1gnb20nrk" path="res://hotbar.gd" id="9_wkp8b"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wkp8b"]
 shader = ExtResource("5_03owx")
@@ -54,6 +56,10 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_20pc6"]
 size = Vector2(14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wkp8b"]
+atlas = ExtResource("8_trn2v")
+region = Rect2(0, 0, 20, 0)
 
 [node name="Node2D" type="Node2D"]
 
@@ -106,6 +112,7 @@ polygon = PackedVector2Array(-2, -6, -7, 1, -8, 5, -3, 8, 3, 8, 8, 3, 5, -6, 2, 
 position = Vector2(121, 36)
 script = ExtResource("5_trn2v")
 item = "apple"
+hide = Callable()
 
 [node name="Img" type="Sprite2D" parent="Map/Tree"]
 material = SubResource("ShaderMaterial_wkp8b")
@@ -147,6 +154,37 @@ shape = SubResource("RectangleShape2D_20pc6")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(-1, 1)
+
+[node name="Container" type="Control" parent="Player/Camera2D"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 90.0
+offset_bottom = 90.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Hotbar1" type="TextureRect" parent="Player/Camera2D/Container"]
+layout_mode = 0
+offset_left = -27.0
+offset_top = -24.0
+offset_right = -7.0
+offset_bottom = -4.0
+texture = SubResource("AtlasTexture_wkp8b")
+script = ExtResource("9_wkp8b")
+
+[node name="Hotbar2" type="TextureRect" parent="Player/Camera2D/Container"]
+layout_mode = 0
+offset_left = 7.0
+offset_top = -24.0
+offset_right = 27.0
+offset_bottom = -4.0
+texture = SubResource("AtlasTexture_wkp8b")
+script = ExtResource("9_wkp8b")
+index = 1
 
 [connection signal="body_entered" from="Map/Rock" to="Map/Rock" method="_on_body_entered"]
 [connection signal="body_exited" from="Map/Rock" to="Map/Rock" method="_on_body_exited"]

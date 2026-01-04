@@ -22,7 +22,7 @@ func _process(_delta: float) -> void:
 		for body in bodies:
 			if body is Player:
 				done = true
-				%Player.items.append(item)
+				Items.inventory.append(item)
 				if hide:
 					$Img.hide()
 				else:
