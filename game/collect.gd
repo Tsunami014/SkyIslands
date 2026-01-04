@@ -23,6 +23,7 @@ func _process(_delta: float) -> void:
 			if body is Player:
 				done = true
 				Items.inventory.append(item)
+				Items.inventoryUpdate.emit()
 				if hide:
 					$Img.hide()
 				else:

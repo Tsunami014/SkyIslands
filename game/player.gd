@@ -9,6 +9,7 @@ func _ready() -> void:
 func _physics_process(_delta):
 	if Input.is_action_just_pressed("change_hotbar"):
 		Items.hotbarSel = (Items.hotbarSel + 1) % Items.maxHotbar
+		Items.hotbarUpdate.emit()
 
 	var input_dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	velocity = input_dir * speed

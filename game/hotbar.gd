@@ -9,6 +9,8 @@ func _ready() -> void:
 		index = Items.maxHotbar
 		Items.maxHotbar = index + 1
 
+	Items.hotbarUpdate.connect(updateImg)
+
 	texture = AtlasTexture.new()
 	texture.atlas = preload("res://assets/gui.png")
 
@@ -18,10 +20,6 @@ func _ready() -> void:
 	tex.texture.atlas = preload("res://assets/items.png")
 	tex.set_position(Vector2i(2, 2))
 	add_child(tex)
-	updateImg()
-
-
-func _process(_delta: float) -> void:
 	updateImg()
 
 func updateImg() -> void:
