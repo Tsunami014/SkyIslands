@@ -11,10 +11,15 @@ func _ready() -> void:
 	tex.texture = imgs
 	tex.set_position(Vector2i(2, 2))
 	add_child(tex)
+	updateImg()
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
+	updateImg()
+
+func updateImg() -> void:
 	if Items.inventory.size() <= index:
-		$Image.texture.region.position.x = 0
+		$Image.hide()
 	else:
-		$Image.texture.region.position.x = 16
+		$Image.show()
+		$Image.texture.region = Items.getImgRegion(Items.inventory[index])

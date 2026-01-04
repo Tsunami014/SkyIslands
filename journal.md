@@ -20,10 +20,11 @@
 ![Godot screenshot](./journalPics/d3.png)
 
 # 4/1/25
-- Added decor and items (time tracker says 5:34 on items and 17:49 on decor)
+- Added decor (spent 17:49 mins on), items (spent 9:14) and gui (spent 19:35)
 - Fixed collisions
 - Added collectables! So far have an apple on a tree, 2 rocks and a bush!
 - Made the map stuff its own node to be easier to use more
+- Added a small amount of gui (a small hotbar to see the first 2 items you picked up)
 
 ![Screenshot of the game working](./journalPics/d4.png)
 
