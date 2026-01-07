@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bhnednmpbc5cx"]
+[gd_scene load_steps=24 format=3 uid="uid://bhnednmpbc5cx"]
 
 [ext_resource type="Texture2D" uid="uid://u2axh15ykh4q" path="res://assets/tileset.png" id="1_uu6xs"]
 [ext_resource type="Script" uid="uid://c0ynf81rkfbyt" path="res://player.gd" id="3_cm0pq"]
@@ -74,6 +74,10 @@ corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 corner_detail = 5
 anti_aliasing = false
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5vvyt"]
+atlas = ExtResource("8_trn2v")
+region = Rect2(20, 0, 20, 20)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_20pc6"]
 bg_color = Color(0.91764706, 0.88235295, 0.83137256, 0.78431374)
@@ -242,6 +246,12 @@ texture = ExtResource("8_trn2v")
 region_rect = Rect2(0, 0, 20, 20)
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
+
+[node name="Selector" type="TextureRect" parent="Player/Camera2D/Inventory/Squares"]
+layout_mode = 0
+offset_right = 20.0
+offset_bottom = 20.0
+texture = SubResource("AtlasTexture_5vvyt")
 
 [node name="Scroll" type="Panel" parent="Player/Camera2D/Inventory"]
 layout_mode = 0
