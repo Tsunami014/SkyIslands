@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bhnednmpbc5cx"]
+[gd_scene load_steps=23 format=3 uid="uid://bhnednmpbc5cx"]
 
 [ext_resource type="Texture2D" uid="uid://u2axh15ykh4q" path="res://assets/tileset.png" id="1_uu6xs"]
 [ext_resource type="Script" uid="uid://c0ynf81rkfbyt" path="res://player.gd" id="3_cm0pq"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://c1lmjrh4mkv4c" path="res://collect.gd" id="5_trn2v"]
 [ext_resource type="Texture2D" uid="uid://wfu8t1vn67h0" path="res://assets/gui.png" id="8_trn2v"]
 [ext_resource type="Script" uid="uid://bpfh1gnb20nrk" path="res://hotbar.gd" id="9_wkp8b"]
+[ext_resource type="Script" uid="uid://bjuuacgamcya3" path="res://inventory.gd" id="10_wkp8b"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wkp8b"]
 shader = ExtResource("5_03owx")
@@ -59,11 +60,38 @@ size = Vector2(14, 14)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wkp8b"]
 atlas = ExtResource("8_trn2v")
-region = Rect2(20, 0, 20, 20)
+region = Rect2(0, 0, 20, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_20pc6"]
 atlas = ExtResource("8_trn2v")
-region = Rect2(20, 0, 20, 20)
+region = Rect2(0, 0, 20, 20)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wkp8b"]
+bg_color = Color(0.3529412, 0.5058824, 0.41960785, 0.78431374)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 5
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_20pc6"]
+bg_color = Color(0.91764706, 0.88235295, 0.83137256, 0.78431374)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 2
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5vvyt"]
+bg_color = Color(0.5568628, 0.5568628, 0.5568628, 0.78431374)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+corner_detail = 2
+anti_aliasing = false
 
 [node name="Node2D" type="Node2D"]
 
@@ -116,7 +144,6 @@ polygon = PackedVector2Array(-2, -6, -7, 1, -8, 5, -3, 8, 3, 8, 8, 3, 5, -6, 2, 
 position = Vector2(121, 36)
 script = ExtResource("5_trn2v")
 item = "apple"
-hide = Callable()
 
 [node name="Img" type="Sprite2D" parent="Map/Tree"]
 material = SubResource("ShaderMaterial_wkp8b")
@@ -188,6 +215,54 @@ offset_right = 26.0
 texture = SubResource("AtlasTexture_20pc6")
 script = ExtResource("9_wkp8b")
 metadata/_custom_type_script = "uid://bpfh1gnb20nrk"
+
+[node name="Inventory" type="Control" parent="Player/Camera2D"]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("10_wkp8b")
+
+[node name="Panel" type="Panel" parent="Player/Camera2D/Inventory"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -80.0
+offset_right = 150.0
+offset_bottom = 80.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_wkp8b")
+
+[node name="TextureRect" type="NinePatchRect" parent="Player/Camera2D/Inventory/Panel"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 10.0
+offset_right = 285.0
+offset_bottom = 150.0
+texture = ExtResource("8_trn2v")
+region_rect = Rect2(0, 0, 20, 20)
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="Scroll" type="Panel" parent="Player/Camera2D/Inventory/Panel"]
+layout_mode = 0
+offset_left = 289.0
+offset_top = 5.0
+offset_right = 296.0
+offset_bottom = 155.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_20pc6")
+
+[node name="Panel" type="Panel" parent="Player/Camera2D/Inventory/Panel/Scroll"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 6.0
+offset_bottom = 149.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_5vvyt")
 
 [connection signal="body_entered" from="Map/Rock" to="Map/Rock" method="_on_body_entered"]
 [connection signal="body_exited" from="Map/Rock" to="Map/Rock" method="_on_body_exited"]

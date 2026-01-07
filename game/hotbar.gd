@@ -9,10 +9,11 @@ func _ready() -> void:
 		index = Items.maxHotbar
 		Items.maxHotbar = index + 1
 
-	Items.hotbarUpdate.connect(updateImg)
+		Items.hotbarUpdate.connect(updateImg)
 
 	texture = AtlasTexture.new()
 	texture.atlas = preload("res://assets/gui.png")
+	texture.region = Rect2(0, 0, 20, 20)
 
 	var tex = TextureRect.new()
 	tex.name = "Image"
@@ -20,6 +21,7 @@ func _ready() -> void:
 	tex.texture.atlas = preload("res://assets/items.png")
 	tex.set_position(Vector2i(2, 2))
 	add_child(tex)
+	tex.hide()
 	updateImg()
 
 func updateImg() -> void:

@@ -1,12 +1,27 @@
 extends CharacterBody2D
 class_name Player
 
+signal InventoryTick()
+
 @export var speed = 80 # pixels/sec
+var inventory = false
 
 func _ready() -> void:
 	pass
 
 func _physics_process(_delta):
+	if Input.is_action_just_pressed("inventory"):
+		inventory = not inventory
+		if inventory:
+			%Inventory.show()
+		else:
+			%Inventory.hide()
+		InventoryTick.emit()
+		return
+	if inventory:
+		InventoryTick.emit()
+		return
+
 	if Input.is_action_just_pressed("change_hotbar"):
 		Items.hotbarSel = (Items.hotbarSel + 1) % Items.maxHotbar
 		Items.hotbarUpdate.emit()
