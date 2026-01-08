@@ -28,3 +28,10 @@
 
 ![Screenshot of the game working](./journalPics/d4.png)
 
+# 8/1/25
+- Added an inventory screen with selection!
+- Added a preview with the name, pic and description for the selected icon
+- Made the hotbar not just use the first 2 inventory items but are user selected
+
+![Another screenshot!](./journalPics/d5.png)
+
