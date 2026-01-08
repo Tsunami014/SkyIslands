@@ -12,11 +12,17 @@ func _ready() -> void:
 	Items.inventoryUpdate.connect(_update)
 	max_wid = int($Squares.size.x/20)
 
+
 func _tick() -> void:
+	tickInput()
+
+func tickInput() -> void:
 	if len(inv) == 0:
 		$Squares/Selector.hide()
+		$Preview.hide()
 		return
 	$Squares/Selector.show()
+	$Preview.show()
 	var lr = sign(Input.get_axis("move_left", "move_right"))
 	if lr != 0:
 		if lr_hold_time >= maxHold:
@@ -50,6 +56,8 @@ func _tick() -> void:
 
 	if Input.is_action_just_pressed("collect"):
 		inv[cursPos].select = not inv[cursPos].select
+
+	$Preview/Img.texture.region = inv[cursPos].texture.region
 
 
 func _update() -> void:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bhnednmpbc5cx"]
+[gd_scene load_steps=28 format=3 uid="uid://bhnednmpbc5cx"]
 
 [ext_resource type="Texture2D" uid="uid://u2axh15ykh4q" path="res://assets/tileset.png" id="1_uu6xs"]
 [ext_resource type="Script" uid="uid://c0ynf81rkfbyt" path="res://player.gd" id="3_cm0pq"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://wfu8t1vn67h0" path="res://assets/gui.png" id="8_trn2v"]
 [ext_resource type="Script" uid="uid://bpfh1gnb20nrk" path="res://hotbar.gd" id="9_wkp8b"]
 [ext_resource type="Script" uid="uid://bjuuacgamcya3" path="res://inventory.gd" id="10_wkp8b"]
+[ext_resource type="Texture2D" uid="uid://45aidkviyjlx" path="res://assets/items.png" id="11_20pc6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wkp8b"]
 shader = ExtResource("5_03owx")
@@ -96,6 +97,22 @@ corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 corner_detail = 2
 anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c6i3y"]
+bg_color = Color(0.6862745, 0.5568628, 0.6313726, 0.78431374)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 2
+anti_aliasing = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5vvyt"]
+shader = ExtResource("5_03owx")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c6i3y"]
+atlas = ExtResource("11_20pc6")
+region = Rect2(0, 0, 16, 16)
 
 [node name="Node2D" type="Node2D"]
 
@@ -222,7 +239,6 @@ metadata/_custom_type_script = "uid://bpfh1gnb20nrk"
 
 [node name="Inventory" type="Panel" parent="Player/Camera2D"]
 unique_name_in_owner = true
-visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -241,7 +257,7 @@ script = ExtResource("10_wkp8b")
 layout_mode = 0
 offset_left = 5.0
 offset_top = 10.0
-offset_right = 285.0
+offset_right = 165.0
 offset_bottom = 150.0
 texture = ExtResource("8_trn2v")
 region_rect = Rect2(0, 0, 20, 20)
@@ -256,19 +272,37 @@ texture = SubResource("AtlasTexture_5vvyt")
 
 [node name="Scroll" type="Panel" parent="Player/Camera2D/Inventory"]
 layout_mode = 0
-offset_left = 289.0
+offset_left = 167.0
 offset_top = 11.0
-offset_right = 296.0
+offset_right = 174.0
 offset_bottom = 149.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_20pc6")
 
-[node name="Panel" type="Panel" parent="Player/Camera2D/Inventory/Scroll"]
+[node name="Bar" type="Panel" parent="Player/Camera2D/Inventory/Scroll"]
 layout_mode = 0
 offset_left = 1.0
 offset_top = 1.0
 offset_right = 6.0
 offset_bottom = 137.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_5vvyt")
+
+[node name="Preview" type="Panel" parent="Player/Camera2D/Inventory"]
+layout_mode = 0
+offset_left = 179.0
+offset_top = 3.0
+offset_right = 297.0
+offset_bottom = 157.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_c6i3y")
+
+[node name="Img" type="TextureRect" parent="Player/Camera2D/Inventory/Preview"]
+material = SubResource("ShaderMaterial_5vvyt")
+layout_mode = 0
+offset_left = 43.0
+offset_top = 3.0
+offset_right = 59.0
+offset_bottom = 19.0
+scale = Vector2(2, 2)
+texture = SubResource("AtlasTexture_c6i3y")
 
 [connection signal="body_entered" from="Map/Rock" to="Map/Rock" method="_on_body_entered"]
 [connection signal="body_exited" from="Map/Rock" to="Map/Rock" method="_on_body_exited"]
