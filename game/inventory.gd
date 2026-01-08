@@ -4,6 +4,7 @@ var max_wid: int
 var cursPos: int = 0
 var lr_hold_time: int = 0
 var ud_hold_time: int = 0
+var first_sel: bool
 const maxHold = 20
 
 func _ready() -> void:
@@ -57,6 +58,9 @@ func tickInput() -> void:
 
 	if Input.is_action_just_pressed("collect"):
 		inv[cursPos].select = not inv[cursPos].select
+		first_sel = inv[cursPos].select
+	elif Input.is_action_pressed("collect"):
+		inv[cursPos].select = first_sel
 	$Preview/Img.texture.region = inv[cursPos].texture.region
 	$Preview/Name.text = inv[cursPos].nam.capitalize()
 	$Preview/Desc.text = Items.data["items"][inv[cursPos].nam]["desc"]
