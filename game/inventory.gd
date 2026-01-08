@@ -54,10 +54,30 @@ func tickInput() -> void:
 		int(cursPos / max_wid) * 20
 	))
 
+
 	if Input.is_action_just_pressed("collect"):
 		inv[cursPos].select = not inv[cursPos].select
-
 	$Preview/Img.texture.region = inv[cursPos].texture.region
+
+
+	var change = false
+	if Input.is_action_just_pressed("hotbar_left"):
+		Items.hotbarSel = 0
+		Items.hotbars[0] = inv[cursPos].nam
+		change = true
+	if Input.is_action_just_pressed("hotbar_right"):
+		Items.hotbarSel = len(Items.hotbars)-1
+		Items.hotbars[Items.hotbarSel] = inv[cursPos].nam
+		Items.hotbarUpdate.emit()
+		change = true
+
+	for i in range(len(Items.hotbars)):
+		if Items.hotbars[i] not in Items.inventory:
+			Items.hotbars[i] = ""
+			change = true
+
+	if change:
+		Items.hotbarUpdate.emit()
 
 
 func _update() -> void:

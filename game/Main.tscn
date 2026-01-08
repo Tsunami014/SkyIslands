@@ -59,14 +59,6 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_20pc6"]
 size = Vector2(14, 14)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_wkp8b"]
-atlas = ExtResource("8_trn2v")
-region = Rect2(0, 0, 20, 20)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_20pc6"]
-atlas = ExtResource("8_trn2v")
-region = Rect2(0, 0, 20, 20)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wkp8b"]
 bg_color = Color(0.3529412, 0.5058824, 0.41960785, 0.78431374)
 corner_radius_top_left = 6
@@ -113,6 +105,14 @@ shader = ExtResource("5_03owx")
 [sub_resource type="AtlasTexture" id="AtlasTexture_c6i3y"]
 atlas = ExtResource("11_20pc6")
 region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wkp8b"]
+atlas = ExtResource("8_trn2v")
+region = Rect2(0, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_20pc6"]
+atlas = ExtResource("8_trn2v")
+region = Rect2(0, 0, 20, 20)
 
 [node name="Node2D" type="Node2D"]
 
@@ -207,36 +207,6 @@ shape = SubResource("RectangleShape2D_20pc6")
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(-1, 1)
 
-[node name="Container" type="Control" parent="Player/Camera2D"]
-layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_top = 85.0
-offset_bottom = 85.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Hotbar" type="TextureRect" parent="Player/Camera2D/Container"]
-layout_mode = 0
-offset_left = -26.0
-offset_top = -20.0
-offset_right = -6.0
-texture = SubResource("AtlasTexture_wkp8b")
-script = ExtResource("9_wkp8b")
-metadata/_custom_type_script = "uid://bpfh1gnb20nrk"
-
-[node name="Hotbar2" type="TextureRect" parent="Player/Camera2D/Container"]
-layout_mode = 0
-offset_left = 6.0
-offset_top = -20.0
-offset_right = 26.0
-texture = SubResource("AtlasTexture_20pc6")
-script = ExtResource("9_wkp8b")
-metadata/_custom_type_script = "uid://bpfh1gnb20nrk"
-
 [node name="Inventory" type="Panel" parent="Player/Camera2D"]
 unique_name_in_owner = true
 anchors_preset = 8
@@ -245,9 +215,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -150.0
-offset_top = -80.0
+offset_top = -86.0
 offset_right = 150.0
-offset_bottom = 80.0
+offset_bottom = 74.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_wkp8b")
@@ -289,9 +259,9 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_5vvyt")
 [node name="Preview" type="Panel" parent="Player/Camera2D/Inventory"]
 layout_mode = 0
 offset_left = 179.0
-offset_top = 3.0
+offset_top = 6.0
 offset_right = 297.0
-offset_bottom = 157.0
+offset_bottom = 154.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_c6i3y")
 
 [node name="Img" type="TextureRect" parent="Player/Camera2D/Inventory/Preview"]
@@ -303,6 +273,36 @@ offset_right = 59.0
 offset_bottom = 19.0
 scale = Vector2(2, 2)
 texture = SubResource("AtlasTexture_c6i3y")
+
+[node name="Container" type="Control" parent="Player/Camera2D"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 88.0
+offset_bottom = 88.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Hotbar" type="TextureRect" parent="Player/Camera2D/Container"]
+layout_mode = 0
+offset_left = -26.0
+offset_top = -20.0
+offset_right = -6.0
+texture = SubResource("AtlasTexture_wkp8b")
+script = ExtResource("9_wkp8b")
+metadata/_custom_type_script = "uid://bpfh1gnb20nrk"
+
+[node name="Hotbar2" type="TextureRect" parent="Player/Camera2D/Container"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = -20.0
+offset_right = 26.0
+texture = SubResource("AtlasTexture_20pc6")
+script = ExtResource("9_wkp8b")
+metadata/_custom_type_script = "uid://bpfh1gnb20nrk"
 
 [connection signal="body_entered" from="Map/Rock" to="Map/Rock" method="_on_body_entered"]
 [connection signal="body_exited" from="Map/Rock" to="Map/Rock" method="_on_body_exited"]

@@ -9,9 +9,8 @@ const ITEMS = preload("res://assets/items.png")
 const SHADER = preload("res://outline.gdshader")
 func _ready() -> void:
 	if !Engine.is_editor_hint():
-		index = Items.maxHotbar
-		Items.maxHotbar = index + 1
-
+		index = len(Items.hotbars)
+		Items.hotbars.append("")
 		Items.hotbarUpdate.connect(updateImg)
 
 	texture = AtlasTexture.new()
@@ -35,8 +34,9 @@ func _ready() -> void:
 func updateImg() -> void:
 	texture.region = Rect2(20 if Items.hotbarSel == index else 0, 0, 20, 20)
 
-	if Items.inventory.size() <= index:
+	var it = Items.hotbars[index]
+	if it == "":
 		$Image.hide()
 	else:
-		$Image.texture.region = Items.getImgRegion(Items.inventory[index])
+		$Image.texture.region = Items.getImgRegion(it)
 		$Image.show()

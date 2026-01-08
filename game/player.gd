@@ -10,6 +10,10 @@ func _ready() -> void:
 	pass
 
 func _physics_process(_delta):
+	if Input.is_action_just_pressed("hotbar_toggle"):
+		Items.hotbarSel = (Items.hotbarSel + 1) % len(Items.hotbars)
+		Items.hotbarUpdate.emit()
+
 	if Input.is_action_just_pressed("inventory"):
 		inventory = not inventory
 		if inventory:
@@ -22,8 +26,11 @@ func _physics_process(_delta):
 		InventoryTick.emit()
 		return
 
-	if Input.is_action_just_pressed("change_hotbar"):
-		Items.hotbarSel = (Items.hotbarSel + 1) % Items.maxHotbar
+	if Input.is_action_just_pressed("hotbar_left"):
+		Items.hotbarSel = 0
+		Items.hotbarUpdate.emit()
+	if Input.is_action_just_pressed("hotbar_right"):
+		Items.hotbarSel = len(Items.hotbars)-1
 		Items.hotbarUpdate.emit()
 
 	var input_dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")

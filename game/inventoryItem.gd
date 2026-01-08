@@ -6,7 +6,7 @@ class_name Inv_item
 @export var nam: String:
 	set(newnam):
 		if is_node_ready() and newnam != nam:
-			texture.region = Items.getImgRegion(nam)
+			texture.region = Items.getImgRegion(newnam)
 		nam = newnam
 var select: bool = false:
 	set(val):

@@ -3,9 +3,9 @@ extends Node
 signal inventoryUpdate()
 signal hotbarUpdate()
 
-static var inventory: Array = []
-static var hotbarSel: int = 0
-static var maxHotbar: int = 0
+var inventory: Array = []
+var hotbars: Array = []
+var hotbarSel: int = 0
 
 func getImgRegion(name: String) -> Rect2:
 	var vec = null
@@ -23,3 +23,9 @@ func getImgRegion(name: String) -> Rect2:
 
 func _ready() -> void:
 	inventoryUpdate.connect(hotbarUpdate.emit)
+
+func addToInv(nam: String) -> void:
+	inventory.append(nam)
+	inventory.sort_custom(func(a, b):
+		return a < b
+	)
