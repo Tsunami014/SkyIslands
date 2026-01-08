@@ -8,7 +8,7 @@ func _on_body_entered(body):
 		_setColour(Color(0.549, 0.563, 0.0, 1.0))
 func _on_body_exited(body):
 	if (not done) and body is Player:
-		_setColour(Color(0.0, 0.0, 0.0, 1.0))
+		_setColour(Color())
 
 func _setColour(col: Color):
 	$Img.set_instance_shader_parameter("outline_color", col)

@@ -48,6 +48,9 @@ func _tick() -> void:
 		int(cursPos / max_wid) * 20
 	))
 
+	if Input.is_action_just_pressed("collect"):
+		inv[cursPos].select = not inv[cursPos].select
+
 
 func _update() -> void:
 	var myinvln = len(inv)

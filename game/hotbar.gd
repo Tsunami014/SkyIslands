@@ -4,6 +4,9 @@ class_name Hotbar
 
 var index: int
 
+const GUI = preload("res://assets/gui.png")
+const ITEMS = preload("res://assets/items.png")
+const SHADER = preload("res://outline.gdshader")
 func _ready() -> void:
 	if !Engine.is_editor_hint():
 		index = Items.maxHotbar
@@ -12,14 +15,19 @@ func _ready() -> void:
 		Items.hotbarUpdate.connect(updateImg)
 
 	texture = AtlasTexture.new()
-	texture.atlas = preload("res://assets/gui.png")
+	texture.atlas = GUI
 	texture.region = Rect2(0, 0, 20, 20)
 
 	var tex = TextureRect.new()
 	tex.name = "Image"
 	tex.texture = AtlasTexture.new()
-	tex.texture.atlas = preload("res://assets/items.png")
+	tex.texture.atlas = ITEMS
 	tex.set_position(Vector2i(2, 2))
+
+	tex.material = ShaderMaterial.new()
+	tex.material.shader = SHADER
+	tex.set_instance_shader_parameter("outline_color", Color())
+
 	add_child(tex)
 	tex.hide()
 	updateImg()
