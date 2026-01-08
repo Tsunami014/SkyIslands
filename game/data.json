@@ -24,6 +24,13 @@
                 "shape": "round"
             }
         },
+        "grass": {
+            "type": "resource",
+            "desc": "A tuft of grass",
+            "tags": {
+                "shape": "shaft"
+            }
+        },
         "stick": {
             "type": "resource",
             "desc": "A stick found lying on the ground",

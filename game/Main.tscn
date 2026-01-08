@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://bhnednmpbc5cx"]
+[gd_scene load_steps=29 format=3 uid="uid://bhnednmpbc5cx"]
 
 [ext_resource type="Texture2D" uid="uid://u2axh15ykh4q" path="res://assets/tileset.png" id="1_uu6xs"]
 [ext_resource type="Script" uid="uid://c0ynf81rkfbyt" path="res://player.gd" id="3_cm0pq"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://wfu8t1vn67h0" path="res://assets/gui.png" id="8_trn2v"]
 [ext_resource type="Script" uid="uid://bpfh1gnb20nrk" path="res://hotbar.gd" id="9_wkp8b"]
 [ext_resource type="Script" uid="uid://bjuuacgamcya3" path="res://inventory.gd" id="10_wkp8b"]
+[ext_resource type="FontFile" uid="uid://cutg4kqshyvvf" path="res://font.ttf" id="11_5vvyt"]
 [ext_resource type="Texture2D" uid="uid://45aidkviyjlx" path="res://assets/items.png" id="11_20pc6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wkp8b"]
@@ -273,6 +274,37 @@ offset_right = 59.0
 offset_bottom = 19.0
 scale = Vector2(2, 2)
 texture = SubResource("AtlasTexture_c6i3y")
+
+[node name="Name" type="Label" parent="Player/Camera2D/Inventory/Preview"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 38.0
+offset_right = 115.0
+offset_bottom = 68.0
+theme_override_colors/font_outline_color = Color(0.2695407, 0.23568046, 0.1311264, 1)
+theme_override_constants/line_spacing = -4
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("11_5vvyt")
+theme_override_font_sizes/font_size = 8
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+clip_text = true
+text_overrun_behavior = 4
+
+[node name="Desc" type="Label" parent="Player/Camera2D/Inventory/Preview"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 70.0
+offset_right = 115.0
+offset_bottom = 146.0
+theme_override_constants/line_spacing = -3
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("11_5vvyt")
+theme_override_font_sizes/font_size = 8
+horizontal_alignment = 1
+autowrap_mode = 3
+clip_text = true
 
 [node name="Container" type="Control" parent="Player/Camera2D"]
 layout_mode = 3

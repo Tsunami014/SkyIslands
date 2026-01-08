@@ -58,6 +58,8 @@ func tickInput() -> void:
 	if Input.is_action_just_pressed("collect"):
 		inv[cursPos].select = not inv[cursPos].select
 	$Preview/Img.texture.region = inv[cursPos].texture.region
+	$Preview/Name.text = inv[cursPos].nam.capitalize()
+	$Preview/Desc.text = Items.data["items"][inv[cursPos].nam]["desc"]
 
 
 	var change = false
