@@ -1,19 +1,26 @@
 {
     "tags": {
-        "priority": [
-
-        ],
-        "tile": [
-
+        "interest": [
+            "interest",
+            "setn=1"
         ],
         "name": [
-            "prefix"
+            "combine",
+            "displ",
+            "set=Unknown"
+        ],
+        "tile": [
+            "interest",
+            "set=null"
+        ],
+        "desc": [
+            "set=A bunch of stuff"
         ],
         "food": [
             "all"
         ],
         "colour": [
-            "last",
+            "interest",
             "prefix",
             "tint"
         ],
@@ -25,13 +32,13 @@
     },
     "recipes": [
         {
-            "tags": ["shape=flat", "shape=flat", "shape=flat"],
+            "tags": ["shape=flat", "shape=?{2,}"],
             "output": {
                 "shape": "box",
                 "name": "box"
             }
         }, {
-            "tags": ["shape=shaft", "shape=shaft", "shape=shaft"],
+            "tags": ["shape=shaft", "shape=?{2,}"],
             "output": {
                 "shape": "flat",
                 "name": "raft"
@@ -39,45 +46,35 @@
         }
     ],
     "items": {
-        "apple": {
-            "type": "resource",
+        "apple": { "type": "resource",
+            "interest": 2,
             "desc": "A sky-warmed apple",
-            "tags": {
-                "food": true,
-                "colour": "red",
-                "shape": "round"
-            }
+            "food": true,
+            "colour": "red",
+            "shape": "round"
         },
-        "grass": {
-            "type": "resource",
+        "grass": { "type": "resource",
+            "interest": 1,
             "desc": "A tuft of grass",
-            "tags": {
-                "shape": "shaft"
-            }
+            "shape": "shaft"
         },
-        "stick": {
-            "type": "resource",
+        "stick": { "type": "resource",
+            "interest": 1,
             "desc": "A stick found lying on the ground",
-            "tags": {
-                "shape": "shaft",
-                "material": "wooden"
-            }
+            "shape": "shaft",
+            "material": "wooden"
         },
-        "rock": {
-            "type": "resource",
+        "rock": { "type": "resource",
+            "interest": 0,
             "desc": "A simple rock found on the ground",
-            "tags": {
-                "shape": "misshapen",
-                "material": "stone"
-            }
+            "shape": "misshapen",
+            "material": "stone"
         },
-        "board": {
-            "type": "resource",
+        "board": { "type": "resource",
+            "interest": 2,
             "desc": "A flat wooden board",
-            "tags": {
-                "shape": "flat",
-                "material": "wooden"
-            }
+            "shape": "flat",
+            "material": "wooden"
         },
         "wooden box": {
             "type": "combined",
