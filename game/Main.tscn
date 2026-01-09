@@ -107,11 +107,11 @@ shader = ExtResource("5_03owx")
 atlas = ExtResource("11_20pc6")
 region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_wkp8b"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_c2ibq"]
 atlas = ExtResource("8_trn2v")
 region = Rect2(0, 0, 20, 20)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_20pc6"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_j4qnp"]
 atlas = ExtResource("8_trn2v")
 region = Rect2(0, 0, 20, 20)
 
@@ -203,6 +203,11 @@ sprite_frames = SubResource("SpriteFrames_wkp8b")
 animation = &"Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource("RectangleShape2D_20pc6")
+
+[node name="Area2D" type="Area2D" parent="Player"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Area2D"]
 shape = SubResource("RectangleShape2D_20pc6")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
@@ -306,7 +311,7 @@ horizontal_alignment = 1
 autowrap_mode = 3
 clip_text = true
 
-[node name="Container" type="Control" parent="Player/Camera2D"]
+[node name="HotbarContainer" type="Control" parent="Player/Camera2D"]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -318,21 +323,21 @@ offset_bottom = 88.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Hotbar" type="TextureRect" parent="Player/Camera2D/Container"]
+[node name="Hotbar" type="TextureRect" parent="Player/Camera2D/HotbarContainer"]
 layout_mode = 0
 offset_left = -26.0
 offset_top = -20.0
 offset_right = -6.0
-texture = SubResource("AtlasTexture_wkp8b")
+texture = SubResource("AtlasTexture_c2ibq")
 script = ExtResource("9_wkp8b")
 metadata/_custom_type_script = "uid://bpfh1gnb20nrk"
 
-[node name="Hotbar2" type="TextureRect" parent="Player/Camera2D/Container"]
+[node name="Hotbar2" type="TextureRect" parent="Player/Camera2D/HotbarContainer"]
 layout_mode = 0
 offset_left = 6.0
 offset_top = -20.0
 offset_right = 26.0
-texture = SubResource("AtlasTexture_20pc6")
+texture = SubResource("AtlasTexture_j4qnp")
 script = ExtResource("9_wkp8b")
 metadata/_custom_type_script = "uid://bpfh1gnb20nrk"
 

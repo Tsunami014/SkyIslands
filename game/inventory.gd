@@ -9,21 +9,16 @@ const maxHold = 20
 
 func _ready() -> void:
 	hide()
-	%Player.InventoryTick.connect(_tick)
-	Items.inventoryUpdate.connect(_update)
 	max_wid = int($Squares.size.x/20)
+	UpdateVis()
 
 
-func _tick() -> void:
+func Tick() -> void:
 	tickInput()
 
 func tickInput() -> void:
 	if len(inv) == 0:
-		$Squares/Selector.hide()
-		$Preview.hide()
 		return
-	$Squares/Selector.show()
-	$Preview.show()
 	var lr = sign(Input.get_axis("move_left", "move_right"))
 	if lr != 0:
 		if lr_hold_time >= maxHold:
@@ -56,10 +51,10 @@ func tickInput() -> void:
 	))
 
 
-	if Input.is_action_just_pressed("collect"):
+	if Input.is_action_just_pressed("select"):
 		inv[cursPos].select = not inv[cursPos].select
 		first_sel = inv[cursPos].select
-	elif Input.is_action_pressed("collect"):
+	elif Input.is_action_pressed("select"):
 		inv[cursPos].select = first_sel
 	$Preview/Img.texture.region = inv[cursPos].texture.region
 	$Preview/Name.text = inv[cursPos].nam.capitalize()
@@ -74,7 +69,6 @@ func tickInput() -> void:
 	if Input.is_action_just_pressed("hotbar_right"):
 		Items.hotbarSel = len(Items.hotbars)-1
 		Items.hotbars[Items.hotbarSel] = inv[cursPos].nam
-		Items.hotbarUpdate.emit()
 		change = true
 
 	for i in range(len(Items.hotbars)):
@@ -83,10 +77,10 @@ func tickInput() -> void:
 			change = true
 
 	if change:
-		Items.hotbarUpdate.emit()
+		%Player.hotbarUpdate.emit()
 
 
-func _update() -> void:
+func Update() -> void:
 	var myinvln = len(inv)
 	var itsinvln = len(Items.inventory)
 	for i in range(max(myinvln, itsinvln)):
@@ -102,3 +96,13 @@ func _update() -> void:
 		else:
 			inv[i].nam = Items.inventory[i]
 	inv = inv.slice(0, itsinvln)
+
+	UpdateVis()
+
+func UpdateVis():
+	if len(inv) == 0:
+		$Squares/Selector.hide()
+		$Preview.hide()
+	else:
+		$Squares/Selector.show()
+		$Preview.show()

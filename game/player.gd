@@ -1,29 +1,32 @@
 extends CharacterBody2D
 class_name Player
 
-signal InventoryTick()
+signal hotbarUpdate()
 
 @export var speed = 80 # pixels/sec
 var inventory = false
-
-func _ready() -> void:
-	pass
 
 func _physics_process(_delta):
 	if Input.is_action_just_pressed("hotbar_toggle"):
 		Items.hotbarSel = (Items.hotbarSel + 1) % len(Items.hotbars)
 		Items.hotbarUpdate.emit()
 
-	if Input.is_action_just_pressed("inventory"):
-		inventory = not inventory
-		if inventory:
-			%Inventory.show()
-		else:
-			%Inventory.hide()
-		InventoryTick.emit()
-		return
+	if Input.is_action_just_pressed("collect"):
+		var found = false
+		for area in $Area2D.get_overlapping_areas():
+			if area is Collectable and not area.done:
+				found = true
+				break
+		if not found:
+			inventory = not inventory
+			if inventory:
+				%Inventory.show()
+				$AnimatedSprite2D.animation = "Idle"
+				return
+			else:
+				%Inventory.hide()
 	if inventory:
-		InventoryTick.emit()
+		%Inventory.Tick()
 		return
 
 	if Input.is_action_just_pressed("hotbar_left"):

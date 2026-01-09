@@ -11,7 +11,7 @@ func _ready() -> void:
 	if !Engine.is_editor_hint():
 		index = len(Items.hotbars)
 		Items.hotbars.append("")
-		Items.hotbarUpdate.connect(updateImg)
+		%Player.hotbarUpdate.connect(updateImg)
 
 	texture = AtlasTexture.new()
 	texture.atlas = GUI

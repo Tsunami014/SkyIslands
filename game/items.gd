@@ -1,8 +1,5 @@
 extends Node
 
-signal inventoryUpdate()
-signal hotbarUpdate()
-
 var inventory: Array = []
 var hotbars: Array = []
 var hotbarSel: int = 0
@@ -23,7 +20,6 @@ func _parseJsonData() -> void:
 		print("JSON Parse Error: ", json.get_error_message(), " at line ", json.get_error_line())
 
 func _ready() -> void:
-	inventoryUpdate.connect(hotbarUpdate.emit)
 	_parseJsonData()
 
 
