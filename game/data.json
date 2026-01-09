@@ -5,8 +5,7 @@
             "setn=1"
         ],
         "name": [
-            "combine",
-            "displ",
+            "combine=dedup",
             "set=Unknown"
         ],
         "tile": [

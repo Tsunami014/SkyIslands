@@ -83,6 +83,9 @@ func merge(its: Array[Dictionary]) -> Dictionary:
 	its.sort_custom(sortInteresting)
 	var out = its[0] if len(its) == 1 else {}
 
+	var nameTags: Array[String] = []
+	var tileTags: Array[String] = []
+
 	for tag in data["tags"]:
 		var t = out[tag] if tag in out else ""
 		for todo in data["tags"][tag]:
@@ -95,21 +98,45 @@ func merge(its: Array[Dictionary]) -> Dictionary:
 			else:
 				instr = todo
 				args = ""
-			for it in its:
-				if (t != null) and (t is not String or t != ""):
-					break
-				match instr:
-					"all":
-						pass
-					"interest":
-						if tag in it: t = it[tag]
-					"set":
-						t = args
+			var blnk = t == null or (t is String and t == "")
 			match instr:
-				"displ":
-					if t is String: t = t.capitalize()
+				"all":
+					pass
+				"interest":
+					if blnk:
+						for it in its:
+							if tag in it:
+								t = it[tag]
+							if t != null and (t is not String or t != ""):
+								break
+				"set":
+					if blnk: t = args
+				"setn":
+					if blnk: t = float(args)
+				"prefix":
+					nameTags.push_back(t)
+				"combine":
+					var a = args.split(",")
+					if blnk or "all" in a or "override" in a:
+						var outs: Array[String] = []
+						for it in its:
+							var t2 = it[tag]
+							if t2 is String and t2 != "":
+								if "dedup" not in a or not outs.has(t2):
+									outs.push_back(t2)
+						if instr == "all":
+							t = " ".join(outs) + t
+						else:
+							t = " ".join(outs)
 		out[tag] = t
 
+	var realname
+	if len(nameTags) == 0:
+		realname = out["name"]
+	else:
+		realname = " ".join(nameTags) + " " + out["name"]
+	out["realname"] = realname.capitalize()
+	out["realtile"] = " ".join(tileTags) + out["tile"]
 	if len(its) > 1:
 		out["contains"] = its
 	else:

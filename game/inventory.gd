@@ -96,7 +96,7 @@ func tickSelect() -> void:
 		if len(toMerge) == 1:
 			if toMerge[0]["contains"]:
 				prev = {
-					"name": "Split items",
+					"realname": "Split items",
 					"tile": toMerge[0]["tile"],
 					"desc": "Will split into:\n"+", ".join(toMerge[0]["contains"].map(func(it): return it["name"]))
 				}
@@ -107,7 +107,7 @@ func tickSelect() -> void:
 	else:
 		prev = inv[cursPos].data
 	$Preview/Img.texture.region = Items.getImgRegion(prev["tile"])
-	$Preview/Name.text = prev["name"]
+	$Preview/Name.text = prev["realname"]
 	$Preview/Desc.text = prev["desc"]
 
 func tickHotbar() -> void:

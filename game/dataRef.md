@@ -9,9 +9,7 @@ Every tag also has the property where if there is only one item to be combined, 
 
 ## Display stuff
 ### Names
-- `prefix`: The property value will be prefixed onto the name at order 1. Higher numbers appear first, and the regular name is at order 0.
-- `prefix=<num>`: Prefixed at order `<num>`
-- `displ`: This property value will be set to one that is more fancy (that being it Capitalises The String) (overrides previous)
+- `prefix`: The property value at this point will be prefixed onto the start of the name if not blank
 ### Pic
 - `tint`: The property value index into the `colours` dict at the bottom will slightly tint the image
 - `addTile`: The property value will be added onto the start of the tile name when looking for the tile name in the dict below
@@ -21,6 +19,10 @@ Every tag also has the property where if there is only one item to be combined, 
 - `all`: The property will be set to the most used value if every combining thing has either that value or is unset, otherwise it will be unset.
 - `interest`: The most interesting item's value will be used (recursively down if not set)
 - `combine`: All the property values from each sorted by interest will be stacked on each other, separated by a space
+    - `combine=<args>`: Combine with some arguments separated by `,`, those being:
+        - `override`: Override the existing name if not blank
+        - `all`: Include the existing name (also applies `override`)
+        - `dedup`: Remove duplicates
 - `set=<value>`: The property value when combined will be `"<value>"` (string) (if unset)
     - `setn=<value>`: Set, but set to this number (not string)
 
@@ -28,9 +30,9 @@ Every tag also has the property where if there is only one item to be combined, 
 These are always present in every item
 - `interest` is used to sort items
 - `name` is the editor name (without attachments from other tags)
-- `nameTags` are the name extensions given by other tags
+- `realname` is the full name to be shown - the name with any added prefixes and formatted nicely
 - `tile` is the tile (again, without attachments)
-- `tileTags` is the same as `nameTags` but for `tile`
+- `realtile` is the full tile to be used - the tile with any added prefixes and checked that it works
 
 # Recipes
 Lists some unique combinations of things
