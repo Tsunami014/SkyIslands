@@ -97,7 +97,7 @@ func tickSelect() -> void:
 			if toMerge[0]["contains"]:
 				prev = {
 					"realname": "Split items",
-					"tile": toMerge[0]["tile"],
+					"realtile": toMerge[0]["tile"],
 					"desc": "Will split into:\n"+", ".join(toMerge[0]["contains"].map(func(it): return it["name"]))
 				}
 			else:
@@ -106,7 +106,7 @@ func tickSelect() -> void:
 			prev = Items.merge(toMerge)
 	else:
 		prev = inv[cursPos].data
-	$Preview/Img.texture.region = Items.getImgRegion(prev["tile"])
+	$Preview/Img.texture.region = Items.getImgRegion(prev["realtile"])
 	$Preview/Name.text = prev["realname"]
 	$Preview/Desc.text = prev["desc"]
 
@@ -123,7 +123,7 @@ func tickHotbar() -> void:
 
 	for i in range(len(Items.hotbars)):
 		if Items.hotbars[i] not in Items.inventory:
-			Items.hotbars[i] = {"tile": ""}
+			Items.hotbars[i] = {"realtile": ""}
 			change = true
 
 	if change:

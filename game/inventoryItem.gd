@@ -7,7 +7,7 @@ class_name Inv_item
 	set(newdat):
 		data = newdat
 		if is_node_ready():
-			texture.region = Items.getImgRegion(data["tile"])
+			texture.region = Items.getImgRegion(data["realtile"])
 var select: bool = false:
 	set(val):
 		if is_node_ready():
@@ -21,7 +21,7 @@ const SHADER = preload("res://outline.gdshader")
 func _ready() -> void:
 	texture = AtlasTexture.new()
 	texture.atlas = ITEMS
-	texture.region = Items.getImgRegion(data["tile"])
+	texture.region = Items.getImgRegion(data["realtile"])
 	material = ShaderMaterial.new()
 	material.shader = SHADER
 	select = select

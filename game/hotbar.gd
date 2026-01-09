@@ -10,7 +10,7 @@ const SHADER = preload("res://outline.gdshader")
 func _ready() -> void:
 	if !Engine.is_editor_hint():
 		index = len(Items.hotbars)
-		Items.hotbars.append({"tile": ""})
+		Items.hotbars.append({"realtile": ""})
 		%Player.hotbarUpdate.connect(updateImg)
 
 	texture = AtlasTexture.new()
@@ -33,4 +33,4 @@ func _ready() -> void:
 func updateImg() -> void:
 	texture.region = Rect2(20 if Items.hotbarSel == index else 0, 0, 20, 20)
 
-	$Image.texture.region = Items.getImgRegion(Items.hotbars[index]["tile"])
+	$Image.texture.region = Items.getImgRegion(Items.hotbars[index]["realtile"])

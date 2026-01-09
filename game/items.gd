@@ -177,7 +177,15 @@ func merge(its: Array[Dictionary]) -> Dictionary:
 	else:
 		realname = " ".join(nameTags) + " " + out["name"]
 	out["realname"] = realname.capitalize()
-	out["realtile"] = " ".join(tileTags) + out["tile"]
+	var realtile
+	while tileTags:
+		realtile = " ".join(tileTags) + " " + out["tile"]
+		if Items.data["tiles"].has(realtile):
+			break
+		tileTags.pop_back()
+	if len(tileTags) == 0:
+		realtile = out["tile"]
+	out["realtile"] = realtile
 	if len(origIts) > 1:
 		out["contains"] = origIts
 	else:
