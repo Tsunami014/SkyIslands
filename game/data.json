@@ -5,12 +5,16 @@
             "setn=1"
         ],
         "name": [
-            "combine=dedup",
-            "set=Unknown"
+            "all",
+            "set=Thing"
         ],
         "tile": [
             "interest",
             "set=null"
+        ],
+        "size": [
+            "set=",
+            "prefix"
         ],
         "desc": [
             "set=A bunch of stuff"
@@ -19,14 +23,19 @@
             "all"
         ],
         "colour": [
-            "interest",
+            "all",
             "prefix",
             "tint"
         ],
         "shape": [
             "all",
+            "prefix",
             "set=misshapen",
-            "addTile"
+            "addtile"
+        ],
+        "material": [
+            "all",
+            "prefix"
         ]
     },
     "recipes": [

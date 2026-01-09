@@ -12,7 +12,7 @@ Every tag also has the property where if there is only one item to be combined, 
 - `prefix`: The property value at this point will be prefixed onto the start of the name if not blank
 ### Pic
 - `tint`: The property value index into the `colours` dict at the bottom will slightly tint the image
-- `addTile`: The property value will be added onto the start of the tile name when looking for the tile name in the dict below
+- `addtile`: The property value will be added onto the start of the tile name when looking for the tile name in the dict below
     - If no matching tile is found, it will recursively try to remove properties that added extra tile stuff until it reaches one that works.
 
 ## Transferring stuff
@@ -33,6 +33,7 @@ These are always present in every item
 - `realname` is the full name to be shown - the name with any added prefixes and formatted nicely
 - `tile` is the tile (again, without attachments)
 - `realtile` is the full tile to be used - the tile with any added prefixes and checked that it works
+- `size` is "" but the more duplicate items are added, the larger the text will say
 
 # Recipes
 Lists some unique combinations of things
