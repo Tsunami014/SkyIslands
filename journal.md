@@ -35,3 +35,10 @@
 
 ![Another screenshot!](./journalPics/d5.png)
 
+# 9/1/25
+- Shuffled around the controls some more (hopefully for the last time)
+- Implemented the merging and splitting! YAYAYAYAYAYAY!
+    - Tho only virtually a demo of the splitting.
+
+![The coolest screenshot yet](./journalPics/d6.png)
+
