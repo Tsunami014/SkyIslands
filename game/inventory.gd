@@ -85,9 +85,30 @@ func tickSelect() -> void:
 		first_sel = inv[cursPos].select
 	elif Input.is_action_pressed("action"):
 		inv[cursPos].select = first_sel
-	$Preview/Img.texture.region = inv[cursPos].texture.region
-	$Preview/Name.text = inv[cursPos].data["name"]
-	$Preview/Desc.text = inv[cursPos].data["desc"]
+
+	var prev
+	if inv[cursPos].select:
+		var toMerge: Array[Dictionary] = []
+		var itslen = len(Items.inventory)
+		for i in range(len(inv)):
+			if inv[i].select and i < itslen:
+				toMerge.push_back(Items.inventory[i])
+		if len(toMerge) == 1:
+			if toMerge[0]["contains"]:
+				prev = {
+					"name": "Split items",
+					"tile": toMerge[0]["tile"],
+					"desc": "Will split into:\n"+", ".join(toMerge[0]["contains"].map(func(it): return it["name"]))
+				}
+			else:
+				prev = toMerge[0]
+		else:
+			prev = Items.merge(toMerge)
+	else:
+		prev = inv[cursPos].data
+	$Preview/Img.texture.region = Items.getImgRegion(prev["tile"])
+	$Preview/Name.text = prev["name"]
+	$Preview/Desc.text = prev["desc"]
 
 func tickHotbar() -> void:
 	var change = false

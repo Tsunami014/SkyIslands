@@ -24,6 +24,8 @@ func _ready() -> void:
 
 
 func getImgRegion(name: String) -> Rect2:
+	if name == "":
+		return Rect2(0, 0, 0, 0)
 	var vec = null
 	match name:
 		"apple":
