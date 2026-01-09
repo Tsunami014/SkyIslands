@@ -92,21 +92,79 @@ func merge(its: Array[Dictionary]) -> Dictionary:
 			its2.append(it.duplicate_deep())
 	its = its2
 
-	var out = its[0] if len(its) == 1 else {}
+	var out = {}
 	var nameTags: Array[String] = []
 	var tileTags: Array[String] = []
 
-	var size
-	match duplicates:
-		0: size = ""
-		1: size = "big"
-		2: size = "large"
-		3: size = "huge"
-		4: size = "enormous"
-		5: size = "gigantic"
-		6: size = "toweringly big"
-		_: size = "astronomically huge"
-	out["size"] = size
+	if len(origIts) > 1:
+		var alltags = {}
+		for tag in data["tags"]:
+			alltags[tag] = []
+		for it in origIts:
+			for t in it:
+				if t in alltags:
+					var i = it[t]
+					if i != null and (i is not String or i != ""):
+						alltags[t].append(i)
+		for r in data["recipes"]:
+			var fail = false
+			for tag in r["input"]:
+				var required = len(alltags[tag]) # Check if there's extra not-blanks
+				var blanks = len(origIts) - required
+				for req in r["input"][tag]:
+					# This is where requirements are handled
+					var nam: String
+					var lowerAmnt
+					var upperAmnt
+					var idx = req.find(":")
+					if idx != -1:
+						nam = req.substr(0, idx)
+						var part2 = req.substr(idx+1)
+						idx = part2.find(",")
+						lowerAmnt = part2.substr(0, idx)
+						upperAmnt = part2.substr(idx+1)
+					else:
+						nam = req
+						lowerAmnt = "1"
+						upperAmnt = ""
+					var curAmnt
+					if nam == "_":
+						curAmnt = blanks
+					else:
+						curAmnt = alltags[tag].count(nam)
+						required -= curAmnt
+					if lowerAmnt != "":
+						if curAmnt < int(lowerAmnt):
+							fail = true
+							break
+					if upperAmnt != "":
+						if curAmnt > int(upperAmnt):
+							fail = true
+							break
+				if fail:
+					break
+				if required > 0:
+					fail = true
+					break
+			if not fail:
+				for k in r["output"]:
+					if k not in out:
+						out[k] = r["output"][k]
+
+	if out == {} and len(its) == 1:
+		out = its[0]
+
+	#var size
+	#match duplicates:
+	#	0: size = ""
+	#	1: size = "big"
+	#	2: size = "large"
+	#	3: size = "huge"
+	#	4: size = "enormous"
+	#	5: size = "gigantic"
+	#	6: size = "toweringly big"
+	#	_: size = "astronomically huge"
+	out["size"] = ""#size
 
 	for tag in data["tags"]:
 		var t = out[tag] if tag in out else ""
@@ -121,6 +179,7 @@ func merge(its: Array[Dictionary]) -> Dictionary:
 				instr = todo
 				args = ""
 			var blnk = t == null or (t is String and t == "")
+			# This is where tag combining happens
 			match instr:
 				"all":
 					if not blnk:

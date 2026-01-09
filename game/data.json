@@ -30,7 +30,6 @@
         "shape": [
             "all",
             "prefix",
-            "set=misshapen",
             "addtile"
         ],
         "material": [
@@ -40,13 +39,21 @@
     },
     "recipes": [
         {
-            "tags": ["shape=flat", "shape=?{2,}"],
+            "input": {
+                "shape": [
+                    "flat:2,"
+                ]
+            },
             "output": {
                 "shape": "box",
                 "name": "box"
             }
         }, {
-            "tags": ["shape=shaft", "shape=?{2,}"],
+            "input": {
+                "shape": [
+                    "shaft:2,"
+                ]
+            },
             "output": {
                 "shape": "flat",
                 "name": "raft"
@@ -55,31 +62,30 @@
     ],
     "items": {
         "apple": { "type": "resource",
-            "interest": 2,
+            "interest": 1,
             "desc": "A sky-warmed apple",
             "food": true,
-            "colour": "orange",
-            "shape": "round"
+            "colour": "orange"
         },
         "grass": { "type": "resource",
-            "interest": 1,
+            "interest": 0,
             "desc": "A tuft of grass",
             "shape": "shaft"
         },
         "stick": { "type": "resource",
-            "interest": 1,
+            "interest": 2.1,
             "desc": "A stick found lying on the ground",
             "shape": "shaft",
             "material": "wooden"
         },
         "rock": { "type": "resource",
-            "interest": 0,
+            "interest": 2,
             "desc": "A simple rock found on the ground",
             "shape": "misshapen",
             "material": "stone"
         },
         "board": { "type": "resource",
-            "interest": 2,
+            "interest": 3,
             "desc": "A flat wooden board",
             "shape": "flat",
             "material": "wooden"
