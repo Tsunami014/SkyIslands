@@ -1,6 +1,6 @@
 extends Node
 
-var inventory: Array = []
+var inventory: Array[Dictionary] = []
 var hotbars: Array = []
 var hotbarSel: int = 0
 var data: Dictionary
@@ -38,7 +38,30 @@ func getImgRegion(name: String) -> Rect2:
 	return Rect2(0, 0, 16, 16)
 
 func addToInv(nam: String) -> void:
-	inventory.append(nam)
+	var dat = data["items"][nam]
+	dat["name"] = nam.capitalize()
+	dat["tile"] = nam
+	dat["contains"] = []
+	inventory.append(dat)
+	sortInv()
+func sortInv() -> void:
 	inventory.sort_custom(func(a, b):
-		return a < b
+		if a["contains"]:
+			return true
+		if b["contains"]:
+			return false
+		return a["name"] < b["name"]
 	)
+
+func split(dat: Dictionary) -> Array[Dictionary]:
+	if dat["contains"]:
+		return dat["contains"]
+	return [dat]
+
+func merge(its: Array[Dictionary]) -> Dictionary:
+	return {
+		"name": " & ".join(its.map(func(it): return it["name"])),
+		"tile": "null",
+		"desc": "Many things",
+		"contains": its
+	}

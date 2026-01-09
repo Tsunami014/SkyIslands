@@ -11,20 +11,13 @@ func _physics_process(_delta):
 		Items.hotbarSel = (Items.hotbarSel + 1) % len(Items.hotbars)
 		Items.hotbarUpdate.emit()
 
-	if Input.is_action_just_pressed("collect"):
-		var found = false
-		for area in $Area2D.get_overlapping_areas():
-			if area is Collectable and not area.done:
-				found = true
-				break
-		if not found:
-			inventory = not inventory
-			if inventory:
-				%Inventory.show()
-				$AnimatedSprite2D.animation = "Idle"
-				return
-			else:
-				%Inventory.hide()
+	if Input.is_action_just_pressed("inventory"):
+		inventory = not inventory
+		if inventory:
+			%Inventory.show()
+			$AnimatedSprite2D.animation = "Idle"
+		else:
+			%Inventory.hide()
 	if inventory:
 		%Inventory.Tick()
 		return

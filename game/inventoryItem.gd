@@ -3,11 +3,11 @@ class_name Inv_item
 
 @export var x: int
 @export var y: int
-@export var nam: String:
-	set(newnam):
-		if is_node_ready() and newnam != nam:
-			texture.region = Items.getImgRegion(newnam)
-		nam = newnam
+@export var data: Dictionary:
+	set(newdat):
+		data = newdat
+		if is_node_ready():
+			texture.region = Items.getImgRegion(data["tile"])
 var select: bool = false:
 	set(val):
 		if is_node_ready():
@@ -21,7 +21,7 @@ const SHADER = preload("res://outline.gdshader")
 func _ready() -> void:
 	texture = AtlasTexture.new()
 	texture.atlas = ITEMS
-	texture.region = Items.getImgRegion(nam)
+	texture.region = Items.getImgRegion(data["tile"])
 	material = ShaderMaterial.new()
 	material.shader = SHADER
 	select = select

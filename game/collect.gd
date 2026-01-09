@@ -18,7 +18,7 @@ func _ready() -> void:
 	pass
 
 func _process(_delta: float) -> void:
-	if (not done) and (not %Player.inventory) and Input.is_action_just_pressed("collect"):
+	if (not done) and (not %Player.inventory) and Input.is_action_just_pressed("action"):
 		for body in get_overlapping_bodies():
 			if body is Player:
 				done = true
