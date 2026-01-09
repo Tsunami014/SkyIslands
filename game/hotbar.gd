@@ -10,7 +10,7 @@ const SHADER = preload("res://outline.gdshader")
 func _ready() -> void:
 	if !Engine.is_editor_hint():
 		index = len(Items.hotbars)
-		Items.hotbars.append({"realtile": ""})
+		Items.hotbars.append({"realtile": "", "tint": Color(0,0,0,0)})
 		%Player.hotbarUpdate.connect(updateImg)
 
 	texture = AtlasTexture.new()
@@ -25,7 +25,7 @@ func _ready() -> void:
 
 	tex.material = ShaderMaterial.new()
 	tex.material.shader = SHADER
-	tex.set_instance_shader_parameter("outline_color", Color())
+	tex.set_instance_shader_parameter("outline_colour", Color())
 
 	add_child(tex)
 	updateImg()
@@ -34,3 +34,4 @@ func updateImg() -> void:
 	texture.region = Rect2(20 if Items.hotbarSel == index else 0, 0, 20, 20)
 
 	$Image.texture.region = Items.getImgRegion(Items.hotbars[index]["realtile"])
+	$Image.set_instance_shader_parameter("tint_colour", Items.hotbars[index]["tint"])

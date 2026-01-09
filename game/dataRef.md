@@ -35,6 +35,7 @@ These are always present in every item
 - `tile` is the tile (again, without attachments)
 - `realtile` is the full tile to be used - the tile with any added prefixes and checked that it works
 - `size` is "" but the more duplicate items are added, the larger the text will say
+- `tint` is the tint to colour with and is the average of all the tint colours
 
 # Recipes
 Lists some unique combinations of things

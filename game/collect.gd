@@ -12,7 +12,7 @@ func _on_body_exited(body):
 		_setColour(Color())
 
 func _setColour(col: Color):
-	$Img.set_instance_shader_parameter("outline_color", col)
+	$Img.set_instance_shader_parameter("outline_colour", col)
 
 func _ready() -> void:
 	pass

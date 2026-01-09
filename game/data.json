@@ -100,7 +100,6 @@
         "grass": { "type": "resource",
             "interest": 0,
             "desc": "A tuft of grass",
-            "shape": "shaft",
             "thickness": 0
         },
         "stick": { "type": "resource",

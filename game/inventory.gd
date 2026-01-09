@@ -107,6 +107,7 @@ func tickSelect() -> void:
 	else:
 		prev = inv[cursPos].data
 	$Preview/Img.texture.region = Items.getImgRegion(prev["realtile"])
+	$Preview/Img.set_instance_shader_parameter("tint_colour", prev["tint"])
 	$Preview/Name.text = prev["realname"]
 	$Preview/Desc.text = prev["desc"]
 
@@ -123,7 +124,7 @@ func tickHotbar() -> void:
 
 	for i in range(len(Items.hotbars)):
 		if Items.hotbars[i] not in Items.inventory:
-			Items.hotbars[i] = {"realtile": ""}
+			Items.hotbars[i] = {"realtile": "", "tint": Color(0,0,0,0)}
 			change = true
 
 	if change:

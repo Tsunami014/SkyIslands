@@ -8,12 +8,12 @@ class_name Inv_item
 		data = newdat
 		if is_node_ready():
 			texture.region = Items.getImgRegion(data["realtile"])
+			set_instance_shader_parameter("tint_colour", data["tint"])
 var select: bool = false:
 	set(val):
 		if is_node_ready():
-			var offs = 1 if val else 2
-			set_position(Vector2i(x*20 + offs, y*20 + offs))
-			set_instance_shader_parameter("outline_color", Color(0.626, 0.556, 0.121, 1.0) if val else Color())
+			set_instance_shader_parameter("outline_colour", Color(0.62, 0.41, 0.2, 1.0) if val else Color())
+			set_instance_shader_parameter("bg_colour", Color(0.82, 0.533, 0.22, 0.392) if val else Color(0.0, 0.0, 0.0, 0.0))
 		select = val
 
 const ITEMS = preload("res://assets/items.png")
@@ -21,7 +21,8 @@ const SHADER = preload("res://outline.gdshader")
 func _ready() -> void:
 	texture = AtlasTexture.new()
 	texture.atlas = ITEMS
-	texture.region = Items.getImgRegion(data["realtile"])
 	material = ShaderMaterial.new()
 	material.shader = SHADER
+	set_position(Vector2i(x*20 + 2, y*20 + 2))
+	data = data
 	select = select

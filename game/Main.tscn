@@ -140,6 +140,7 @@ hide = true
 
 [node name="Img" type="Sprite2D" parent="Map/Rock"]
 material = SubResource("ShaderMaterial_wkp8b")
+instance_shader_parameters/tint_colour = Color(0, 0, 0, 0)
 texture = ExtResource("4_lgr22")
 region_enabled = true
 region_rect = Rect2(64, 0, 16, 16)

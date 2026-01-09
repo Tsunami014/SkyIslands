@@ -95,6 +95,7 @@ func merge(its: Array[Dictionary]) -> Dictionary:
 	var out = {}
 	var nameTags: Array[String] = []
 	var tileTags: Array[String] = []
+	var tints: Array[String] = []
 
 	var alltags = {}
 	for tag in data["tags"]:
@@ -182,16 +183,18 @@ func merge(its: Array[Dictionary]) -> Dictionary:
 	if out == {} and len(its) == 1:
 		out = its[0]
 
-	#var size
-	#match duplicates:
-	#	0: size = ""
-	#	1: size = "big"
-	#	2: size = "large"
-	#	3: size = "huge"
-	#	4: size = "enormous"
-	#	5: size = "gigantic"
-	#	6: size = "toweringly big"
-	#	_: size = "astronomically huge"
+	"""var size
+	match duplicates:
+		0: size = ""
+		1: size = "long"
+		2: size = "big"
+		3: size = "large"
+		4: size = "huge"
+		5: size = "enormous"
+		6: size = "gigantic"
+		7: size = "toweringly big"
+		_: size = "astronomically huge"
+	"""
 	out["size"] = ""#size
 
 	for tag in data["tags"]:
@@ -259,7 +262,8 @@ func merge(its: Array[Dictionary]) -> Dictionary:
 					if not blnk: nameTags.push_back(t)
 				"addtile":
 					if not blnk: tileTags.push_back(t)
-				"tint": pass # TODO
+				"tint":
+					if not blnk: tints.append(t)
 		out[tag] = t
 
 	var realname
@@ -277,6 +281,24 @@ func merge(its: Array[Dictionary]) -> Dictionary:
 	if len(tileTags) == 0:
 		realtile = out["tile"]
 	out["realtile"] = realtile
+	if len(tints) == 0:
+		out["tint"] = Color(0, 0, 0, 0)
+	else:
+		var tot_r = 0
+		var tot_g = 0
+		var tot_b = 0
+		for c in tints:
+			var colour = Color(c)
+			tot_r += colour.r
+			tot_g += colour.g
+			tot_b += colour.b
+
+		var count = tints.size()
+		out["tint"] = Color(
+			tot_r / count,
+			tot_g / count,
+			tot_b / count
+		)
 	if len(origIts) > 1:
 		out["contains"] = origIts
 	else:
