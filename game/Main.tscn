@@ -162,6 +162,36 @@ region_rect = Rect2(80, 0, 16, 16)
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/Rock2"]
 polygon = PackedVector2Array(-2, -6, -7, 1, -8, 5, -3, 8, 3, 8, 8, 3, 5, -6, 2, -8)
 
+[node name="Stick" type="Area2D" parent="Map"]
+position = Vector2(147, 70)
+script = ExtResource("5_trn2v")
+item = "stick"
+hide = true
+
+[node name="Img" type="Sprite2D" parent="Map/Stick"]
+material = SubResource("ShaderMaterial_wkp8b")
+texture = ExtResource("4_lgr22")
+region_enabled = true
+region_rect = Rect2(112, 0, 16, 16)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/Stick"]
+polygon = PackedVector2Array(2, -4, -7, 0, -6, 4, 0, 3, 1, 6, 3, 6, 5, 4, 4, 1, 7, -1, 7, -3)
+
+[node name="Stick2" type="Area2D" parent="Map"]
+position = Vector2(168, 51)
+script = ExtResource("5_trn2v")
+item = "stick"
+hide = true
+
+[node name="Img" type="Sprite2D" parent="Map/Stick2"]
+material = SubResource("ShaderMaterial_wkp8b")
+texture = ExtResource("4_lgr22")
+region_enabled = true
+region_rect = Rect2(112, 16, 16, 16)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/Stick2"]
+polygon = PackedVector2Array(1, -5, -1, 0, -7, 3, -6, 6, -2, 4, 1, 6, 4, 5, 3, 2, 7, -2, 5, -4, 3, -3)
+
 [node name="Tree" type="Area2D" parent="Map"]
 position = Vector2(121, 36)
 script = ExtResource("5_trn2v")
@@ -210,6 +240,7 @@ position = Vector2(-1, 1)
 
 [node name="Inventory" type="Panel" parent="Player/Camera2D"]
 unique_name_in_owner = true
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -340,6 +371,10 @@ metadata/_custom_type_script = "uid://bpfh1gnb20nrk"
 [connection signal="body_exited" from="Map/Rock" to="Map/Rock" method="_on_body_exited"]
 [connection signal="body_entered" from="Map/Rock2" to="Map/Rock2" method="_on_body_entered"]
 [connection signal="body_exited" from="Map/Rock2" to="Map/Rock2" method="_on_body_exited"]
+[connection signal="body_entered" from="Map/Stick" to="Map/Stick" method="_on_body_entered"]
+[connection signal="body_exited" from="Map/Stick" to="Map/Stick" method="_on_body_exited"]
+[connection signal="body_entered" from="Map/Stick2" to="Map/Stick2" method="_on_body_entered"]
+[connection signal="body_exited" from="Map/Stick2" to="Map/Stick2" method="_on_body_exited"]
 [connection signal="body_entered" from="Map/Tree" to="Map/Tree" method="_on_body_entered"]
 [connection signal="body_exited" from="Map/Tree" to="Map/Tree" method="_on_body_exited"]
 [connection signal="body_entered" from="Map/Grass" to="Map/Grass" method="_on_body_entered"]

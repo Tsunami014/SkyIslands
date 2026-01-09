@@ -58,7 +58,7 @@
             "interest": 2,
             "desc": "A sky-warmed apple",
             "food": true,
-            "colour": "red",
+            "colour": "orange",
             "shape": "round"
         },
         "grass": { "type": "resource",
@@ -93,10 +93,11 @@
         "null":  [0, 0],
         "apple": [1, 0],
         "rock":  [2, 0],
-        "grass": [3, 0]
+        "grass": [3, 0],
+        "stick": [4, 0]
     },
     "colours": {
-        "red": "#FB9955",
+        "orange": "#EBA955",
         "yellow": "#EFDF55",
         "wooden": "#653F2D",
         "stone": "#777777"
