@@ -10,7 +10,7 @@ const SHADER = preload("res://outline.gdshader")
 func _ready() -> void:
 	if !Engine.is_editor_hint():
 		index = len(Items.hotbars)
-		Items.hotbars.append("")
+		Items.hotbars.append({"tile": ""})
 		%Player.hotbarUpdate.connect(updateImg)
 
 	texture = AtlasTexture.new()
@@ -28,15 +28,9 @@ func _ready() -> void:
 	tex.set_instance_shader_parameter("outline_color", Color())
 
 	add_child(tex)
-	tex.hide()
 	updateImg()
 
 func updateImg() -> void:
 	texture.region = Rect2(20 if Items.hotbarSel == index else 0, 0, 20, 20)
 
-	var it = Items.hotbars[index]
-	if it == "":
-		$Image.hide()
-	else:
-		$Image.texture.region = Items.getImgRegion(it)
-		$Image.show()
+	$Image.texture.region = Items.getImgRegion(Items.hotbars[index]["tile"])

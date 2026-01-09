@@ -114,16 +114,16 @@ func tickHotbar() -> void:
 	var change = false
 	if Input.is_action_just_pressed("hotbar_left"):
 		Items.hotbarSel = 0
-		Items.hotbars[0] = inv[cursPos].nam
+		Items.hotbars[0] = inv[cursPos].data
 		change = true
 	if Input.is_action_just_pressed("hotbar_right"):
 		Items.hotbarSel = len(Items.hotbars)-1
-		Items.hotbars[Items.hotbarSel] = inv[cursPos].nam
+		Items.hotbars[Items.hotbarSel] = inv[cursPos].data
 		change = true
 
 	for i in range(len(Items.hotbars)):
 		if Items.hotbars[i] not in Items.inventory:
-			Items.hotbars[i] = ""
+			Items.hotbars[i] = {"tile": ""}
 			change = true
 
 	if change:
