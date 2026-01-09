@@ -38,6 +38,15 @@ These are always present in every item
 # Recipes
 Lists some unique combinations of things
 
+Inputs list tags and requirements for each tag in the format `<name>:<min>,<max>` (or `<name>`, which is equivalent to `<name>:1,`).
+The min or max can be left blank to represent an infinite bound in that direction (no min or no max value).
+Any value names not counted but present in the recipe will result in a faliure to craft it (can use `<name>:,` to allow specific names)
+
+- `$` = all values (useful for finding total number of items to craft)
+- `%` = something unused so far that has a value
+- `#` = something unused so far that has a value, and will 'use it' so it is no longer a faliure point (useful with max set)
+- `_` = empty values
+
 # Items
 Lists all the items that can be found in the world naturally.
 

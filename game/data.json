@@ -60,6 +60,18 @@
                 "name": "raft",
                 "tile": "raft"
             }
+        }, {
+            "input": {
+                "shape": [
+                    "shaft",
+                    "#"
+                ]
+            },
+            "output": {
+                "shape": "pointy",
+                "name": "spear",
+                "tile": "spear"
+            }
         }
     ],
     "items": {
@@ -104,7 +116,8 @@
         "grass": [3, 0],
         "stick": [4, 0],
 
-        "raft":  [0, 1]
+        "raft":  [0, 1],
+        "spear": [0, 2]
     },
     "colours": {
         "orange": "#EBA955",

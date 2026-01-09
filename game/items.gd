@@ -128,11 +128,19 @@ func merge(its: Array[Dictionary]) -> Dictionary:
 						lowerAmnt = "1"
 						upperAmnt = ""
 					var curAmnt
-					if nam == "_":
-						curAmnt = blanks
-					else:
-						curAmnt = alltags[tag].count(nam)
-						required -= curAmnt
+					match nam:
+						"_": curAmnt = blanks
+						"$": curAmnt = len(origIts)
+						"%", "#":
+							curAmnt = required
+							if nam == "#":
+								if upperAmnt != "":
+									required -= int(upperAmnt)
+								else:
+									required = 0
+						_:
+							curAmnt = alltags[tag].count(nam)
+							required -= curAmnt
 					if lowerAmnt != "":
 						if curAmnt < int(lowerAmnt):
 							fail = true
