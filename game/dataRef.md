@@ -25,6 +25,7 @@ Every tag also has the property where if there is only one item to be combined, 
         - `dedup`: Remove duplicates
 - `set=<value>`: The property value when combined will be `"<value>"` (string) (if unset)
     - `setn=<value>`: Set, but set to this number (not string)
+- `add`: The property values will be converted to numbers and added together to get the final result (overrides existing) (only happens when more than 1 property value exists in the first place)
 
 ## Special tags
 These are always present in every item
@@ -38,13 +39,15 @@ These are always present in every item
 # Recipes
 Lists some unique combinations of things
 
-Inputs list tags and requirements for each tag in the format `<name>:<min>,<max>` (or `<name>`, which is equivalent to `<name>:1,`).
+Inputs list tags and requirements in order for each tag in the format `<name>:<min>,<max>` (or `<name>`, which is equivalent to `<name>:1,`).
 The min or max can be left blank to represent an infinite bound in that direction (no min or no max value).
 Any value names not counted but present in the recipe will result in a faliure to craft it (can use `<name>:,` to allow specific names)
 
-- `$` = all values (useful for finding total number of items to craft)
+- `&` = all values (useful for finding total number of items being crafted)
 - `%` = something unused so far that has a value
 - `#` = something unused so far that has a value, and will 'use it' so it is no longer a faliure point (useful with max set)
+- `>` = use up the rest of the values (by itself converts to `#:,`)
+- `$` = all unique values
 - `_` = empty values
 
 # Items

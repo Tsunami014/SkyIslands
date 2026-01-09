@@ -35,14 +35,24 @@
         "material": [
             "all",
             "prefix"
+        ],
+        "thickness": [
+            "add",
+            "set=1"
         ]
     },
     "recipes": [
         {
             "input": {
-                "shape": [
-                    "flat:2,"
-                ]
+                "name": [ "$:4,", ">" ]
+            },
+            "output": {
+                "name": "mess",
+                "tile": "mess"
+            }
+        }, {
+            "input": {
+                "shape": [ "flat:3," ]
             },
             "output": {
                 "shape": "box",
@@ -51,9 +61,18 @@
             }
         }, {
             "input": {
-                "shape": [
-                    "shaft:2,"
-                ]
+                "shape": [ "shaft" ],
+                "food": [ "#:1," ],
+                "thickness": [ "0.0", ">" ]
+            },
+            "output": {
+                "shape": "shaft",
+                "name": "rod",
+                "tile": "rod"
+            }
+        }, {
+            "input": {
+                "shape": [ "shaft:2," ]
             },
             "output": {
                 "shape": "flat",
@@ -62,10 +81,7 @@
             }
         }, {
             "input": {
-                "shape": [
-                    "shaft",
-                    "#"
-                ]
+                "shape": [ "shaft", "#:,1" ]
             },
             "output": {
                 "shape": "pointy",
@@ -84,7 +100,8 @@
         "grass": { "type": "resource",
             "interest": 0,
             "desc": "A tuft of grass",
-            "shape": "shaft"
+            "shape": "shaft",
+            "thickness": 0
         },
         "stick": { "type": "resource",
             "interest": 2.1,
@@ -96,13 +113,15 @@
             "interest": 2,
             "desc": "A simple rock found on the ground",
             "shape": "misshapen",
-            "material": "stone"
+            "material": "stone",
+            "thickness": 2
         },
         "board": { "type": "resource",
             "interest": 3,
             "desc": "A flat wooden board",
             "shape": "flat",
-            "material": "wooden"
+            "material": "wooden",
+            "thickness": 2
         },
         "wooden box": {
             "type": "combined",
@@ -111,13 +130,16 @@
     },
     "tiles": {
         "null":  [0, 0],
-        "apple": [1, 0],
-        "rock":  [2, 0],
-        "grass": [3, 0],
-        "stick": [4, 0],
+        "mess":  [1, 0],
+
+        "apple": [2, 0],
+        "rock":  [3, 0],
+        "grass": [4, 0],
+        "stick": [5, 0],
 
         "raft":  [0, 1],
-        "spear": [0, 2]
+        "spear": [1, 1],
+        "rod":   [2, 1]
     },
     "colours": {
         "orange": "#EBA955",

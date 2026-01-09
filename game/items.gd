@@ -96,23 +96,36 @@ func merge(its: Array[Dictionary]) -> Dictionary:
 	var nameTags: Array[String] = []
 	var tileTags: Array[String] = []
 
+	var alltags = {}
+	for tag in data["tags"]:
+		alltags[tag] = []
+	for it in origIts:
+		for t in it:
+			if t in alltags:
+				var i = it[t]
+				if i != null and (i is not String or i != ""):
+					alltags[t].append(i)
+
 	if len(origIts) > 1:
-		var alltags = {}
-		for tag in data["tags"]:
-			alltags[tag] = []
-		for it in origIts:
-			for t in it:
-				if t in alltags:
-					var i = it[t]
-					if i != null and (i is not String or i != ""):
-						alltags[t].append(i)
 		for r in data["recipes"]:
 			var fail = false
 			for tag in r["input"]:
 				var required = len(alltags[tag]) # Check if there's extra not-blanks
 				var blanks = len(origIts) - required
+				var strtags = []
+				for t in alltags[tag]:
+					if t is String:
+						strtags.append(t)
+					elif t is float or t is int:
+						strtags.append(str(float(t)))
+					else:
+						strtags.append(str(t))
 				for req in r["input"][tag]:
 					# This is where requirements are handled
+					if req == ">":
+						req = "#:,"
+					elif req[0] == ">":
+						req = "#"+req.substr(1)
 					var nam: String
 					var lowerAmnt
 					var upperAmnt
@@ -130,7 +143,7 @@ func merge(its: Array[Dictionary]) -> Dictionary:
 					var curAmnt
 					match nam:
 						"_": curAmnt = blanks
-						"$": curAmnt = len(origIts)
+						"&": curAmnt = len(origIts)
 						"%", "#":
 							curAmnt = required
 							if nam == "#":
@@ -138,8 +151,15 @@ func merge(its: Array[Dictionary]) -> Dictionary:
 									required -= int(upperAmnt)
 								else:
 									required = 0
+						"$":
+							var uniques = []
+							for t in strtags:
+								if not uniques.has(t):
+									uniques.append(t)
+							curAmnt = len(uniques)
+							required -= curAmnt
 						_:
-							curAmnt = alltags[tag].count(nam)
+							curAmnt = strtags.count(nam)
 							required -= curAmnt
 					if lowerAmnt != "":
 						if curAmnt < int(lowerAmnt):
@@ -222,8 +242,7 @@ func merge(its: Array[Dictionary]) -> Dictionary:
 					if (not blnk) and "all" not in a and "override" not in a:
 						break
 					var outs: Array[String] = []
-					for it in its:
-						var t2 = it[tag]
+					for t2 in alltags[tag]:
 						if t2 is String and t2 != "":
 							if "dedup" not in a or not outs.has(t2):
 								outs.push_back(t2)
@@ -231,6 +250,11 @@ func merge(its: Array[Dictionary]) -> Dictionary:
 						t = " ".join(outs) + t
 					else:
 						t = " ".join(outs)
+				"add":
+					if len(alltags[tag]) > 0:
+						t = 0
+						for it in alltags[tag]:
+							t += float(it)
 				"prefix":
 					if not blnk: nameTags.push_back(t)
 				"addtile":
