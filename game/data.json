@@ -1,4 +1,28 @@
 {
+    "tags": {
+        "priority": [
+
+        ],
+        "tile": [
+
+        ],
+        "name": [
+            "prefix"
+        ],
+        "food": [
+            "all"
+        ],
+        "colour": [
+            "last",
+            "prefix",
+            "tint"
+        ],
+        "shape": [
+            "all",
+            "set=misshapen",
+            "addTile"
+        ]
+    },
     "recipes": [
         {
             "tags": ["shape=flat", "shape=flat", "shape=flat"],
@@ -59,6 +83,12 @@
             "type": "combined",
             "items": ["board", "board", "board"]
         }
+    },
+    "tiles": {
+        "null":  [0, 0],
+        "apple": [1, 0],
+        "rock":  [2, 0],
+        "grass": [3, 0]
     },
     "colours": {
         "red": "#FB9955",

@@ -26,17 +26,9 @@ func _ready() -> void:
 func getImgRegion(name: String) -> Rect2:
 	if name == "":
 		return Rect2(0, 0, -1, -1)
-	var vec = null
-	match name:
-		"apple":
-			vec = Vector2i(1, 0)
-		"rock":
-			vec = Vector2i(2, 0)
-		"grass":
-			vec = Vector2i(3, 0)
-
-	if vec:
-		return Rect2(vec * 16, Vector2(16, 16))
+	if name in data["tiles"]:
+		var pos = data["tiles"][name]
+		return Rect2(pos[0] * 16, pos[1] * 16, 16, 16)
 	return Rect2(0, 0, 16, 16)
 
 func addToInv(nam: String) -> void:
@@ -60,7 +52,16 @@ func split(dat: Dictionary) -> Array[Dictionary]:
 		return dat["contains"]
 	return [dat]
 
+func flatten(its: Array[Dictionary]) -> Array[Dictionary]:
+	var allits: Array[Dictionary] = []
+	for it in its:
+		if it["contains"]:
+			allits.append_array(flatten(it["contains"]))
+		else:
+			allits.append(it)
+	return allits
 func merge(its: Array[Dictionary]) -> Dictionary:
+	its = flatten(its)
 	return {
 		"name": " & ".join(its.map(func(it): return it["name"])),
 		"tile": "null",
