@@ -111,6 +111,7 @@ func merge(its: Array[Dictionary]) -> Dictionary:
 	if len(origIts) > 1:
 		for r in data["recipes"]:
 			var fail = false
+			var names = {}
 			for tag in r["input"]:
 				var required = len(alltags[tag]) # Check if there's extra not-blanks
 				var blanks = len(origIts) - required
@@ -124,53 +125,83 @@ func merge(its: Array[Dictionary]) -> Dictionary:
 						strtags.append(str(t))
 				for req in r["input"][tag]:
 					# This is where requirements are handled
-					if req == ">":
-						req = "#:,"
-					elif req[0] == ">":
-						req = "#"+req.substr(1)
-					var nam: String
-					var lowerAmnt
-					var upperAmnt
-					var idx = req.find(":")
-					if idx != -1:
-						nam = req.substr(0, idx)
-						var part2 = req.substr(idx+1)
-						idx = part2.find(",")
-						lowerAmnt = part2.substr(0, idx)
-						upperAmnt = part2.substr(idx+1)
+					if req[0] == "(":
+						var idx = req.find(")")+1
+						var nam = req.substr(0, idx)
+						var eq2 = req.substr(idx)
+						var itidx = strtags.find(eq2)
+						var done = false
+						if itidx != -1:
+							for it in origIts:
+								if not it.has(tag):
+									continue
+								if itidx == 0:
+									names[nam] = it
+									done = true
+									required -= 1
+									break
+								itidx -= 1
+						if not done:
+							fail = true
+							break
 					else:
-						nam = req
-						lowerAmnt = "1"
-						upperAmnt = ""
-					var curAmnt
-					match nam:
-						"_": curAmnt = blanks
-						"&": curAmnt = len(origIts)
-						"%", "#":
-							curAmnt = required
-							if nam == "#":
-								if upperAmnt != "":
-									required -= int(upperAmnt)
-								else:
-									required = 0
-						"$":
-							var uniques = []
-							for t in strtags:
-								if not uniques.has(t):
-									uniques.append(t)
-							curAmnt = len(uniques)
-							required -= curAmnt
-						_:
-							curAmnt = strtags.count(nam)
-							required -= curAmnt
-					if lowerAmnt != "":
-						if curAmnt < int(lowerAmnt):
-							fail = true
-							break
-					if upperAmnt != "":
-						if curAmnt > int(upperAmnt):
-							fail = true
-							break
+						if req == ">":
+							req = "#:,"
+						elif req[0] == ">":
+							req = "#"+req.substr(1)
+						var lowerAmnt
+						var upperAmnt
+						var curAmnt
+						var nam: String
+						var idx = req.find(":")
+						if idx != -1:
+							nam = req.substr(0, idx)
+							var part2 = req.substr(idx+1)
+							idx = part2.find(",")
+							var lower = part2.substr(0, idx)
+							if lower != "":
+								lowerAmnt = int(lower)
+							else:
+								lowerAmnt = -1
+							var upper = part2.substr(idx+1)
+							if upper != "":
+								upperAmnt = int(upper)
+							else:
+								upperAmnt = -1
+						else:
+							nam = req
+							lowerAmnt = 1
+							upperAmnt = -1
+						match nam:
+							"_": curAmnt = blanks
+							"&": curAmnt = len(origIts)
+							"%", "#":
+								curAmnt = required
+								if nam == "#":
+									if upperAmnt != "":
+										required -= int(upperAmnt)
+									else:
+										required = 0
+							"$":
+								var uniques = []
+								for t in strtags:
+									if not uniques.has(t):
+										uniques.append(t)
+								curAmnt = len(uniques)
+								required -= curAmnt
+							_:
+								curAmnt = strtags.count(nam)
+								if upperAmnt != -1:
+									curAmnt = min(curAmnt, upperAmnt)
+								required -= curAmnt
+						if lowerAmnt != -1:
+							if curAmnt < lowerAmnt:
+								fail = true
+								break
+						if upperAmnt != -1:
+							if curAmnt > upperAmnt:
+								fail = true
+								break
 				if required > 0:
 					fail = true
 				if fail:
@@ -178,7 +209,13 @@ func merge(its: Array[Dictionary]) -> Dictionary:
 			if not fail:
 				for k in r["output"]:
 					if k not in xpect:
-						xpect[k] = r["output"][k]
+						var new = r["output"][k]
+						if new[0] == "(":
+							if names.has(new):
+								new = names[new][k]
+							else:
+								continue
+						xpect[k] = new
 				break
 
 	if xpect == {} and len(its) == 1:
@@ -282,7 +319,10 @@ func merge(its: Array[Dictionary]) -> Dictionary:
 		for t in out:
 			if t in xpect or t not in data["tags"]:
 				continue
-			var success = t not in alls or alls[t] != out[t]
+			var o = out[t]
+			if o == null or (o is String and o == ""):
+				continue
+			var success = t not in alls or alls[t] != o
 			if not success:
 				for it in its:
 					if (not it.has(t)) or it[t] == null or (it[t] is String and it[t] == ""):
@@ -291,9 +331,9 @@ func merge(its: Array[Dictionary]) -> Dictionary:
 			if success:
 				var dat = data["tags"][t]
 				if "prefix" in dat:
-					nameTags.push_back(out[t])
+					nameTags.push_back(o)
 				if "addtile" in dat:
-					tileTags.push_back(out[t])
+					tileTags.push_back(o)
 
 	var realname
 	if len(nameTags) == 0:

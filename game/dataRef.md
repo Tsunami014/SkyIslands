@@ -41,15 +41,15 @@ These are always present in every item
 # Recipes
 Lists some unique combinations of things
 
-Inputs list tags and requirements in order for each tag in the format `<name>:<min>,<max>` (or `<name>`, which is equivalent to `<name>:1,`).
+Inputs list tags and requirements in order for each tag in the format `<value>:<min>,<max>` (or `<value>`, which is equivalent to `<value>:1,`) or `(<name>)<value>` (only allowed one, as it's named).
 The min or max can be left blank to represent an infinite bound in that direction (no min or no max value).
-Any value names not counted but present in the recipe will result in a faliure to craft it (can use `<name>:,` to allow specific names)
+Any values not counted but present in the recipe will result in a faliure to craft it (can use `<value>:,` to allow specific names)
 
 - `&` = all values (useful for finding total number of items being crafted)
 - `%` = something unused so far that has a value
 - `#` = something unused so far that has a value, and will 'use it' so it is no longer a faliure point (useful with max set)
 - `>` = use up the rest of the values (by itself converts to `#:,`)
-- `$` = all unique values
+- `$` = all unique values (uses the values)
 - `_` = empty values
 
 # Items

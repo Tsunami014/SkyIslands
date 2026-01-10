@@ -104,10 +104,11 @@
             }
         }, {
             "input": {
-                "hardness": [ "1.0", "2.0:1,1" ]
+                "hardness": [ "(repl)1.0", "2.0:1,1" ]
             },
             "output": {
-                "_shape": "pointy"
+                "_shape": "pointy",
+                "name": "(repl)"
             }
         }, {
             "input": {
