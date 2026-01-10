@@ -28,7 +28,11 @@ func _ready() -> void:
 	tex.set_instance_shader_parameter("outline_colour", Color())
 
 	add_child(tex)
-	updateImg()
+	if Engine.is_editor_hint():
+		tex.hide()
+		texture.region = Rect2(0, 0, 20, 20)
+	else:
+		updateImg()
 
 func updateImg() -> void:
 	texture.region = Rect2(20 if Items.hotbarSel == index else 0, 0, 20, 20)

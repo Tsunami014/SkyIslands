@@ -17,10 +17,12 @@
             "prefix"
         ],
         "desc": [
+            "all",
             "set=A bunch of stuff"
         ],
         "food": [
-            "all"
+            "all",
+            "setn=0"
         ],
         "colour": [
             "all",
@@ -44,20 +46,33 @@
     "recipes": [
         {
             "input": {
-                "name": [ "$:4,", ">" ]
-            },
-            "output": {
-                "name": "mess",
-                "tile": "mess"
-            }
-        }, {
-            "input": {
-                "shape": [ "flat:3," ]
+                "shape": [ "flat:2," ]
             },
             "output": {
                 "shape": "box",
                 "name": "box",
-                "tile": "raft"
+                "tile": "box",
+                "desc": "A container for stuff to go in"
+            }
+        }, {
+            "input": {
+                "shape": [ "shaft:2," ]
+            },
+            "output": {
+                "shape": "flat",
+                "name": "raft",
+                "tile": "raft",
+                "desc": "A flat board thing"
+            }
+        }, {
+            "input": {
+                "shape": [ "shaft", "misshapen:,1" ]
+            },
+            "output": {
+                "shape": "shaft",
+                "name": "spear",
+                "tile": "spear",
+                "desc": "A spear to poke stuff with"
             }
         }, {
             "input": {
@@ -67,26 +82,29 @@
             },
             "output": {
                 "shape": "shaft",
+                "colour": "",
                 "name": "rod",
-                "tile": "rod"
+                "tile": "rod",
+                "desc": "A rod to go fishing with"
             }
         }, {
             "input": {
-                "shape": [ "shaft:2," ]
+                "thickness": [ "0.0:2," ]
             },
             "output": {
-                "shape": "flat",
-                "name": "raft",
-                "tile": "raft"
+                "shape": "shaft",
+                "name": "rope",
+                "tile": "rope",
+                "desc": "A short rope woven out of thin stuff"
             }
         }, {
             "input": {
-                "shape": [ "shaft", "#:,1" ]
+                "name": [ "$:3,", ">" ]
             },
             "output": {
-                "shape": "pointy",
-                "name": "spear",
-                "tile": "spear"
+                "name": "mess",
+                "tile": "mess",
+                "desc": "What happens when you combine too much stuff"
             }
         }
     ],
@@ -94,7 +112,7 @@
         "apple": { "type": "resource",
             "interest": 1,
             "desc": "A sky-warmed apple",
-            "food": true,
+            "food": 1,
             "colour": "orange"
         },
         "grass": { "type": "resource",
@@ -138,7 +156,10 @@
 
         "raft":  [0, 1],
         "spear": [1, 1],
-        "rod":   [2, 1]
+        "rod":   [2, 1],
+        "rope":  [3, 1],
+
+        "box":   [0, 2]
     },
     "colours": {
         "orange": "#EBA955",

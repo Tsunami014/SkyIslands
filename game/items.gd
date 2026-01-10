@@ -79,7 +79,7 @@ func flatten(its: Array[Dictionary]) -> Array[Dictionary]:
 			allits.append(it)
 	return allits
 func merge(its: Array[Dictionary]) -> Dictionary:
-	its = flatten(its)
+	#its = flatten(its)
 	its.sort_custom(sortInteresting)
 
 	var origIts = its
@@ -93,6 +93,7 @@ func merge(its: Array[Dictionary]) -> Dictionary:
 	its = its2
 
 	var out = {}
+	var xpect = {}
 	var nameTags: Array[String] = []
 	var tileTags: Array[String] = []
 	var tints: Array[String] = []
@@ -177,25 +178,27 @@ func merge(its: Array[Dictionary]) -> Dictionary:
 					break
 			if not fail:
 				for k in r["output"]:
-					if k not in out:
-						out[k] = r["output"][k]
+					if k not in xpect:
+						xpect[k] = r["output"][k]
+				break
 
-	if out == {} and len(its) == 1:
-		out = its[0]
+	if xpect == {} and len(its) == 1:
+		xpect = its[0]
 
-	"""var size
-	match duplicates:
-		0: size = ""
-		1: size = "long"
-		2: size = "big"
-		3: size = "large"
-		4: size = "huge"
-		5: size = "enormous"
-		6: size = "gigantic"
-		7: size = "toweringly big"
-		_: size = "astronomically huge"
-	"""
-	out["size"] = ""#size
+		var size
+		match duplicates:
+			0: size = ""
+			1: size = "long"
+			2: size = "big"
+			3: size = "large"
+			4: size = "huge"
+			5: size = "enormous"
+			6: size = "gigantic"
+			7: size = "toweringly big"
+			_: size = "astronomically huge"
+		out["size"] = size
+	else:
+		out["size"] = ""
 
 	for tag in data["tags"]:
 		var t = out[tag] if tag in out else ""
@@ -258,13 +261,19 @@ func merge(its: Array[Dictionary]) -> Dictionary:
 						t = 0
 						for it in alltags[tag]:
 							t += float(it)
-				"prefix":
-					if not blnk: nameTags.push_back(t)
 				"addtile":
 					if not blnk: tileTags.push_back(t)
 				"tint":
-					if not blnk: tints.append(t)
+					if t is String and t != "": tints.append(t)
 		out[tag] = t
+
+	for x in xpect:
+		out[x] = xpect[x]
+	for i in out:
+		if i not in xpect:
+			var dat = data["tags"][i]
+			if "prefix" in dat:
+				nameTags.push_back(out[i])
 
 	var realname
 	if len(nameTags) == 0:

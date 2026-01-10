@@ -98,6 +98,7 @@ func tickSelect() -> void:
 				prev = {
 					"realname": "Split items",
 					"realtile": toMerge[0]["tile"],
+					"tint": toMerge[0]["tint"],
 					"desc": "Will split into:\n"+", ".join(toMerge[0]["contains"].map(func(it): return it["name"]))
 				}
 			else:

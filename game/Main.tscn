@@ -193,6 +193,21 @@ region_rect = Rect2(112, 16, 16, 16)
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/Stick2"]
 polygon = PackedVector2Array(1, -5, -1, 0, -7, 3, -6, 6, -2, 4, 1, 6, 4, 5, 3, 2, 7, -2, 5, -4, 3, -3)
 
+[node name="Stick3" type="Area2D" parent="Map"]
+position = Vector2(128, 155)
+script = ExtResource("5_trn2v")
+item = "stick"
+hide = true
+
+[node name="Img" type="Sprite2D" parent="Map/Stick3"]
+material = SubResource("ShaderMaterial_wkp8b")
+texture = ExtResource("4_lgr22")
+region_enabled = true
+region_rect = Rect2(112, 16, 16, 16)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/Stick3"]
+polygon = PackedVector2Array(1, -5, -1, 0, -7, 3, -6, 6, -2, 4, 1, 6, 4, 5, 3, 2, 7, -2, 5, -4, 3, -3)
+
 [node name="Tree" type="Area2D" parent="Map"]
 position = Vector2(121, 36)
 script = ExtResource("5_trn2v")
@@ -221,6 +236,36 @@ region_enabled = true
 region_rect = Rect2(96, 0, 16, 16)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/Grass"]
+polygon = PackedVector2Array(5, -6, -7, -4, -6, 2, -3, 6, 3, 6, 6, 4)
+
+[node name="Grass2" type="Area2D" parent="Map"]
+position = Vector2(89, 132)
+script = ExtResource("5_trn2v")
+item = "grass"
+hide = true
+
+[node name="Img" type="Sprite2D" parent="Map/Grass2"]
+material = SubResource("ShaderMaterial_wkp8b")
+texture = ExtResource("4_lgr22")
+region_enabled = true
+region_rect = Rect2(96, 0, 16, 16)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/Grass2"]
+polygon = PackedVector2Array(5, -6, -7, -4, -6, 2, -3, 6, 3, 6, 6, 4)
+
+[node name="Grass3" type="Area2D" parent="Map"]
+position = Vector2(183, 134)
+script = ExtResource("5_trn2v")
+item = "grass"
+hide = true
+
+[node name="Img" type="Sprite2D" parent="Map/Grass3"]
+material = SubResource("ShaderMaterial_wkp8b")
+texture = ExtResource("4_lgr22")
+region_enabled = true
+region_rect = Rect2(96, 0, 16, 16)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/Grass3"]
 polygon = PackedVector2Array(5, -6, -7, -4, -6, 2, -3, 6, 3, 6, 6, 4)
 
 [node name="Player" type="CharacterBody2D" parent="."]
@@ -376,7 +421,13 @@ metadata/_custom_type_script = "uid://bpfh1gnb20nrk"
 [connection signal="body_exited" from="Map/Stick" to="Map/Stick" method="_on_body_exited"]
 [connection signal="body_entered" from="Map/Stick2" to="Map/Stick2" method="_on_body_entered"]
 [connection signal="body_exited" from="Map/Stick2" to="Map/Stick2" method="_on_body_exited"]
+[connection signal="body_entered" from="Map/Stick3" to="Map/Stick3" method="_on_body_entered"]
+[connection signal="body_exited" from="Map/Stick3" to="Map/Stick3" method="_on_body_exited"]
 [connection signal="body_entered" from="Map/Tree" to="Map/Tree" method="_on_body_entered"]
 [connection signal="body_exited" from="Map/Tree" to="Map/Tree" method="_on_body_exited"]
 [connection signal="body_entered" from="Map/Grass" to="Map/Grass" method="_on_body_entered"]
 [connection signal="body_exited" from="Map/Grass" to="Map/Grass" method="_on_body_exited"]
+[connection signal="body_entered" from="Map/Grass2" to="Map/Grass2" method="_on_body_entered"]
+[connection signal="body_exited" from="Map/Grass2" to="Map/Grass2" method="_on_body_exited"]
+[connection signal="body_entered" from="Map/Grass3" to="Map/Grass3" method="_on_body_entered"]
+[connection signal="body_exited" from="Map/Grass3" to="Map/Grass3" method="_on_body_exited"]
