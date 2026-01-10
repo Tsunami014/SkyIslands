@@ -1,11 +1,11 @@
 {
     "tags": {
         "interest": [
-            "interest",
+            "add",
             "setn=1"
         ],
         "name": [
-            "max=name prevolance",
+            "interest",
             "set=Thing"
         ],
         "tile": [
@@ -44,10 +44,6 @@
             "setn=1"
         ],
         "hardness": [
-            "max",
-            "setn=1"
-        ],
-        "name prevolance": [
             "max",
             "setn=1"
         ]
@@ -142,7 +138,6 @@
             "desc": "A sky-warmed apple",
             "food": 1,
             "hardness": 0,
-            "name prevolance": 0,
             "colour": "orange"
         },
         "grass": { "type": "resource",
@@ -170,7 +165,6 @@
             "desc": "A lilypad, floating on the water",
             "food": 1,
             "hardness": 0,
-            "name prevolance": 0,
             "colour": "green"
         },
         "board": { "type": "resource",

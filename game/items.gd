@@ -52,14 +52,6 @@ func addToInv(nam: String) -> void:
 	sortInv()
 
 func sortInteresting(a, b) -> bool:
-	var diff = len(a["contains"]) - len(b["contains"])
-	if diff != 0:
-		return diff > 0
-
-	var diff2 = a["name prevolance"] - b["name prevolance"]
-	if diff2 != 0:
-		return diff2 > 0
-
 	var diff3 = a["interest"] - b["interest"]
 	if diff3 != 0:
 		return diff3 > 0
@@ -213,7 +205,7 @@ func merge(its: Array[Dictionary]) -> Dictionary:
 				if fail:
 					break
 			if not fail:
-				xpect["name prevolance"] = 2
+				out["interest"] = 100
 				for k in r["output"]:
 					if k not in xpect:
 						var new = r["output"][k]
@@ -241,6 +233,11 @@ func merge(its: Array[Dictionary]) -> Dictionary:
 		out["size"] = size
 	else:
 		out["size"] = ""
+	if "interest" in xpect:
+		if "interest" in out:
+			out["interest"] += xpect["interest"]
+		else:
+			out["interest"] = xpect["interest"]
 
 	var alls = {}
 	for tag in alltags:
@@ -277,7 +274,12 @@ func merge(its: Array[Dictionary]) -> Dictionary:
 				"interest":
 					if not blnk:
 						break
-					t = alltags[tag][0]
+					var mx = -1
+					for it in its:
+						if tag in it:
+							if it["interest"] > mx:
+								t = it[tag]
+								mx = it["interest"]
 				"set":
 					if blnk: t = args
 				"setn":
