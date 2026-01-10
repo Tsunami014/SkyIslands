@@ -13,7 +13,14 @@ var select: bool = false:
 	set(val):
 		if is_node_ready():
 			set_instance_shader_parameter("outline_colour", Color(0.62, 0.41, 0.2, 1.0) if val else Color())
-			set_instance_shader_parameter("bg_colour", Color(0.82, 0.533, 0.22, 0.392) if val else Color(0.0, 0.0, 0.0, 0.0))
+			var col
+			if val:
+				col = Color(0.753, 0.482, 0.184, 0.5)
+			elif len(data["contains"]) < 2:
+				col = Color(0.0, 0.0, 0.0, 0.0)
+			else:
+				col = Color(0.682, 0.224, 0.553, 0.314)
+			set_instance_shader_parameter("bg_colour", col)
 		select = val
 
 const ITEMS = preload("res://assets/items.png")

@@ -61,11 +61,6 @@ func sortInteresting(a, b) -> bool:
 func sortInv() -> void:
 	inventory.sort_custom(sortInteresting)
 
-func split(dat: Dictionary) -> Array[Dictionary]:
-	if dat["contains"]:
-		return dat["contains"]
-	return [dat]
-
 func flatten(its: Array[Dictionary]) -> Array[Dictionary]:
 	var allits: Array[Dictionary] = []
 	for it in its:
@@ -74,6 +69,9 @@ func flatten(its: Array[Dictionary]) -> Array[Dictionary]:
 		else:
 			allits.append(it)
 	return allits
+func split(dat: Dictionary) -> Array[Dictionary]:
+	return flatten([dat])
+
 func merge(its: Array[Dictionary]) -> Dictionary:
 	#its = flatten(its)
 	its.sort_custom(sortInteresting)

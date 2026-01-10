@@ -147,6 +147,7 @@ func Update() -> void:
 			inv[i].queue_free()
 		else:
 			inv[i].data = Items.inventory[i]
+			inv[i].select = inv[i].select
 	inv = inv.slice(0, itsinvln)
 
 	UpdateVis()
