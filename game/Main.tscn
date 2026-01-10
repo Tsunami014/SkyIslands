@@ -1,11 +1,10 @@
-[gd_scene load_steps=33 format=3 uid="uid://bhnednmpbc5cx"]
+[gd_scene load_steps=32 format=3 uid="uid://bhnednmpbc5cx"]
 
 [ext_resource type="PackedScene" uid="uid://cjs0fxvnmlt2c" path="res://prefabs/cloud_bg.tscn" id="1_03owx"]
 [ext_resource type="Script" uid="uid://c0ynf81rkfbyt" path="res://player.gd" id="3_cm0pq"]
 [ext_resource type="PackedScene" uid="uid://ddtexobqogmst" path="res://prefabs/collects/rock.tscn" id="3_wkp8b"]
 [ext_resource type="PackedScene" uid="uid://bwg00p42inp34" path="res://prefabs/collects/rock2.tscn" id="4_20pc6"]
 [ext_resource type="Texture2D" uid="uid://dpgiaf1dx7oxb" path="res://assets/player.png" id="4_fos0i"]
-[ext_resource type="Shader" uid="uid://d2g06mw6eeycg" path="res://outline.gdshader" id="5_03owx"]
 [ext_resource type="PackedScene" uid="uid://cj1524yguib8j" path="res://prefabs/collects/stick.tscn" id="5_5vvyt"]
 [ext_resource type="Script" uid="uid://knrt8ut8vw04" path="res://map.gd" id="5_fos0i"]
 [ext_resource type="PackedScene" uid="uid://4u7fjqwcm2tf" path="res://prefabs/collects/stick2.tscn" id="6_c6i3y"]
@@ -17,6 +16,7 @@
 [ext_resource type="Script" uid="uid://bjuuacgamcya3" path="res://inventory.gd" id="10_wkp8b"]
 [ext_resource type="FontFile" uid="uid://cutg4kqshyvvf" path="res://font.ttf" id="11_5vvyt"]
 [ext_resource type="Texture2D" uid="uid://45aidkviyjlx" path="res://assets/items.png" id="11_20pc6"]
+[ext_resource type="Material" uid="uid://bsbc3hyppv0ge" path="res://item_material.tres" id="14_sc1dx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3dxm6"]
 atlas = ExtResource("4_fos0i")
@@ -102,9 +102,6 @@ corner_radius_bottom_left = 3
 corner_detail = 2
 anti_aliasing = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_5vvyt"]
-shader = ExtResource("5_03owx")
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_c6i3y"]
 atlas = ExtResource("11_20pc6")
 region = Rect2(0, 0, 16, 16)
@@ -138,6 +135,9 @@ position = Vector2(147, 70)
 [node name="Stick2" parent="Map" instance=ExtResource("6_c6i3y")]
 position = Vector2(168, 51)
 
+[node name="Stick3" parent="Map" instance=ExtResource("6_c6i3y")]
+position = Vector2(105, 149)
+
 [node name="Tree" parent="Map" instance=ExtResource("7_c2ibq")]
 position = Vector2(123, 25)
 
@@ -149,9 +149,6 @@ position = Vector2(199, 114)
 
 [node name="Grass3" parent="Map" instance=ExtResource("8_j4qnp")]
 position = Vector2(170, 156)
-
-[node name="Stick3" parent="Map" instance=ExtResource("6_c6i3y")]
-position = Vector2(105, 149)
 
 [node name="Lilypad" parent="Map" instance=ExtResource("9_sc1dx")]
 position = Vector2(119, 87)
@@ -231,7 +228,7 @@ offset_bottom = 154.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_c6i3y")
 
 [node name="Img" type="TextureRect" parent="Player/Camera2D/Inventory/Preview"]
-material = SubResource("ShaderMaterial_5vvyt")
+material = ExtResource("14_sc1dx")
 layout_mode = 0
 offset_left = 43.0
 offset_top = 3.0

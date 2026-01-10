@@ -6,8 +6,9 @@ var index: int
 
 const GUI = preload("res://assets/gui.png")
 const ITEMS = preload("res://assets/items.png")
-const SHADER = preload("res://outline.gdshader")
+const MATERIAL = preload("res://item_material.tres")
 func _ready() -> void:
+	show()
 	if !Engine.is_editor_hint():
 		index = len(Items.hotbars)
 		Items.hotbars.append({"realtile": "", "tint": Color(0,0,0,0)})
@@ -23,8 +24,7 @@ func _ready() -> void:
 	tex.texture.atlas = ITEMS
 	tex.set_position(Vector2i(2, 2))
 
-	tex.material = ShaderMaterial.new()
-	tex.material.shader = SHADER
+	tex.material = MATERIAL
 	tex.set_instance_shader_parameter("outline_colour", Color())
 
 	add_child(tex)

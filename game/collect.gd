@@ -23,7 +23,7 @@ func _process(_delta: float) -> void:
 			if body is Player:
 				done = true
 				if hide:
-					$Img.hide()
+					queue_free()
 				else:
 					_setColour(Color(0.0, 0.0, 0.0, 1.0))
 					$Img.region_rect.position.x += $Img.region_rect.size.x

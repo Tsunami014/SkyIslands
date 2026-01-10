@@ -17,12 +17,11 @@ var select: bool = false:
 		select = val
 
 const ITEMS = preload("res://assets/items.png")
-const SHADER = preload("res://outline.gdshader")
+const MATERIAL = preload("res://item_material.tres")
 func _ready() -> void:
 	texture = AtlasTexture.new()
 	texture.atlas = ITEMS
-	material = ShaderMaterial.new()
-	material.shader = SHADER
+	material = MATERIAL.duplicate()
 	set_position(Vector2i(x*20 + 2, y*20 + 2))
 	data = data
 	select = select

@@ -1,17 +1,3 @@
 [remap]
 
-importer="csv_translation"
-type="Translation"
-uid="uid://ba2ax5wddhtq4"
-
-[deps]
-
-files=["res://map/simplified/Level_0/TopTiles.0.translation", "res://map/simplified/Level_0/TopTiles.0.translation", "res://map/simplified/Level_0/TopTiles.0.translation", "res://map/simplified/Level_0/TopTiles.0.translation", "res://map/simplified/Level_0/TopTiles.0.translation", "res://map/simplified/Level_0/TopTiles.0.translation", "res://map/simplified/Level_0/TopTiles.0.translation", "res://map/simplified/Level_0/TopTiles.0.translation", "res://map/simplified/Level_0/TopTiles.0.translation", "res://map/simplified/Level_0/TopTiles.0.translation", "res://map/simplified/Level_0/TopTiles.0.translation", "res://map/simplified/Level_0/TopTiles.0.translation", "res://map/simplified/Level_0/TopTiles.0.translation", "res://map/simplified/Level_0/TopTiles.0.translation", "res://map/simplified/Level_0/TopTiles.0.translation"]
-
-source_file="res://map/simplified/Level_0/TopTiles.csv"
-dest_files=["res://map/simplified/Level_0/TopTiles.0.translation", "res://map/simplified/Level_0/TopTiles.0.translation", "res://map/simplified/Level_0/TopTiles.0.translation", "res://map/simplified/Level_0/TopTiles.0.translation", "res://map/simplified/Level_0/TopTiles.0.translation", "res://map/simplified/Level_0/TopTiles.0.translation", "res://map/simplified/Level_0/TopTiles.0.translation", "res://map/simplified/Level_0/TopTiles.0.translation", "res://map/simplified/Level_0/TopTiles.0.translation", "res://map/simplified/Level_0/TopTiles.0.translation", "res://map/simplified/Level_0/TopTiles.0.translation", "res://map/simplified/Level_0/TopTiles.0.translation", "res://map/simplified/Level_0/TopTiles.0.translation", "res://map/simplified/Level_0/TopTiles.0.translation", "res://map/simplified/Level_0/TopTiles.0.translation"]
-
-[params]
-
-compress=true
-delimiter=0
+importer="keep"

@@ -1,11 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cj1524yguib8j"]
+[gd_scene load_steps=4 format=3 uid="uid://cj1524yguib8j"]
 
 [ext_resource type="Script" uid="uid://c1lmjrh4mkv4c" path="res://collect.gd" id="1_wqger"]
-[ext_resource type="Shader" uid="uid://d2g06mw6eeycg" path="res://outline.gdshader" id="2_lljye"]
+[ext_resource type="Material" uid="uid://bsbc3hyppv0ge" path="res://item_material.tres" id="2_wqger"]
 [ext_resource type="Texture2D" uid="uid://crlx114upnysu" path="res://assets/decor.png" id="3_0o8sx"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wkp8b"]
-shader = ExtResource("2_lljye")
 
 [node name="Stick" type="Area2D"]
 script = ExtResource("1_wqger")
@@ -13,7 +10,7 @@ item = "stick"
 hide = true
 
 [node name="Img" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_wkp8b")
+material = ExtResource("2_wqger")
 texture = ExtResource("3_0o8sx")
 region_enabled = true
 region_rect = Rect2(112, 0, 16, 16)
