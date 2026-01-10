@@ -8,8 +8,8 @@ const GUI = preload("res://assets/gui.png")
 const ITEMS = preload("res://assets/items.png")
 const MATERIAL = preload("res://item_material.tres")
 func _ready() -> void:
-	show()
 	if !Engine.is_editor_hint():
+		show()
 		index = len(Items.hotbars)
 		Items.hotbars.append({"realtile": "", "tint": Color(0,0,0,0)})
 		%Player.hotbarUpdate.connect(updateImg)

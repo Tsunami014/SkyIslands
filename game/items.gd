@@ -319,8 +319,6 @@ func merge(its: Array[Dictionary]) -> Dictionary:
 							for it in alltags[tag]:
 								if it > t:
 									t = it
-				"tint":
-					if t is String and t != "": tints.append(t)
 		out[tag] = t
 
 	for x in xpect:
@@ -347,6 +345,8 @@ func merge(its: Array[Dictionary]) -> Dictionary:
 					nameTags.push_back(o)
 				if "addtile" in dat:
 					tileTags.push_back(o)
+				if "tint" in dat:
+					tints.append(o)
 
 	var realname
 	if len(nameTags) == 0:

@@ -106,11 +106,11 @@ anti_aliasing = false
 atlas = ExtResource("11_20pc6")
 region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_kjvhd"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_sc1dx"]
 atlas = ExtResource("8_trn2v")
 region = Rect2(0, 0, 20, 20)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_5tuhn"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_kjvhd"]
 atlas = ExtResource("8_trn2v")
 region = Rect2(0, 0, 20, 20)
 
@@ -286,7 +286,7 @@ layout_mode = 0
 offset_left = -26.0
 offset_top = -20.0
 offset_right = -6.0
-texture = SubResource("AtlasTexture_kjvhd")
+texture = SubResource("AtlasTexture_sc1dx")
 script = ExtResource("9_wkp8b")
 metadata/_custom_type_script = "uid://bpfh1gnb20nrk"
 
@@ -296,6 +296,6 @@ layout_mode = 0
 offset_left = 6.0
 offset_top = -20.0
 offset_right = 26.0
-texture = SubResource("AtlasTexture_5tuhn")
+texture = SubResource("AtlasTexture_kjvhd")
 script = ExtResource("9_wkp8b")
 metadata/_custom_type_script = "uid://bpfh1gnb20nrk"

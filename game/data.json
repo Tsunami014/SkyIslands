@@ -71,33 +71,36 @@
             }
         }, {
             "input": {
-                "shape": [ "shaft", "pointy:1" ]
+                "shape": [ "(repl)shaft", "pointy:1" ]
             },
             "output": {
                 "shape": "shaft",
+                "material": "(repl)",
                 "name": "spear",
                 "tile": "spear",
                 "desc": "A spear to poke stuff with"
             }
         }, {
             "input": {
-                "shape": [ "shaft", "pointy:2" ]
+                "shape": [ "(repl)shaft", "pointy:2" ]
             },
             "output": {
                 "shape": "misshapen",
+                "material": "(repl)",
                 "name": "pickaxe",
                 "tile": "pickaxe",
                 "desc": "A pickaxe to break stuff down with"
             }
         }, {
             "input": {
-                "shape": [ "shaft", "malleable:," ],
+                "shape": [ "(repl)shaft", "malleable:," ],
                 "food": [ "#:1,", ">" ],
                 "thickness": [ "0.0", ">" ]
             },
             "output": {
                 "shape": "shaft",
                 "colour": "",
+                "material": "(repl)",
                 "name": "rod",
                 "tile": "rod",
                 "desc": "A rod to go fishing with"
@@ -203,9 +206,9 @@
         "box":    [0, 2]
     },
     "colours": {
-        "orange": "#EBA955",
+        "orange": "#FBB975",
         "green":  "#88FF9F",
-        "wooden": "#653F2D",
-        "stone":  "#777777"
+        "wooden": "#855F4D",
+        "stone":  "#999999"
     }
 }

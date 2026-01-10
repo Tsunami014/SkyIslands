@@ -29,7 +29,7 @@ void fragment() {
 			if (texture(TEXTURE, uv2).a > 0.0) {
 				outside = false;
 				if (tint_colour != vec4(0.0,0.0,0.0,0.0)) {
-					col = mix(outline_colour, tint_colour, 0.25);
+					col = mix(outline_colour, tint_colour, 0.2);
 				} else {
 					col = outline_colour;
 				}

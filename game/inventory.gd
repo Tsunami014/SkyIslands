@@ -60,11 +60,9 @@ func tickCraft() -> void:
 	var toMerge: Array[Dictionary] = []
 	var itslen = len(Items.inventory)
 	for i in range(len(inv)):
-		if inv[i].select:
-			inv[i].select = false
-			if i < itslen:
-				toMerge.push_back(Items.inventory.pop_at(i-offs))
-				offs += 1
+		if inv[i].select and i < itslen:
+			toMerge.push_back(Items.inventory.pop_at(i-offs))
+			offs += 1
 	if offs == 0:
 		return
 	var toSel
@@ -78,6 +76,8 @@ func tickCraft() -> void:
 	Items.sortInv()
 	cursPos = Items.inventory.find(toSel)
 	Update()
+	for i in inv:
+		i.select = false
 
 func tickSelect() -> void:
 	if Input.is_action_just_pressed("action"):
