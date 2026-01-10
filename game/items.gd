@@ -207,7 +207,7 @@ func merge(its: Array[Dictionary]) -> Dictionary:
 				for k in r["output"]:
 					if k not in xpect:
 						var new = r["output"][k]
-						if new[0] == "(":
+						if new is String and len(new) > 0 and new[0] == "(":
 							if names.has(new):
 								new = names[new][k]
 							else:

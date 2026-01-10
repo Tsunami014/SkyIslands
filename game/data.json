@@ -91,8 +91,8 @@
             }
         }, {
             "input": {
-                "shape": [ "shaft" ],
-                "food": [ "#:1," ],
+                "shape": [ "shaft", "malleable:," ],
+                "food": [ "#:1,", ">" ],
                 "thickness": [ "0.0", ">" ]
             },
             "output": {
@@ -128,7 +128,8 @@
                 "shape": "misshapen",
                 "name": "mess",
                 "tile": "mess",
-                "desc": "What happens when you combine too much stuff"
+                "desc": "What happens when you combine too much stuff",
+                "interest": -0.5
             }
         }
     ],
@@ -137,6 +138,7 @@
             "interest": 1,
             "desc": "A sky-warmed apple",
             "food": 1,
+            "shape": "malleable",
             "hardness": 0,
             "colour": "orange"
         },
@@ -144,6 +146,7 @@
             "interest": 0,
             "desc": "A tuft of grass",
             "food": 1,
+            "shape": "malleable",
             "thickness": 0,
             "hardness": 0
         },
@@ -164,6 +167,7 @@
             "interest": 1,
             "desc": "A lilypad, floating on the water",
             "food": 1,
+            "shape": "malleable",
             "hardness": 0,
             "colour": "green"
         },
