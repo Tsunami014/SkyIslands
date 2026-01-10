@@ -36,30 +36,29 @@ func _ready() -> void:
 		var line = file.get_csv_line()
 		if line.size() >= 2:
 			for x in line.size():
-				if line[x] == "0":
+				if line[x] == "0" or line[x] == "3":
 					toMerge.append(get_tile_poly(x, y))
 		y += 1
 
-	var outPoly := PackedVector2Array(toMerge[0])
-	var attempts := 100
-	while !toMerge.is_empty() and (attempts > 0):
-		outPoly = merge_poly_array_to(outPoly, toMerge)
-		attempts -= 1
-	if !toMerge.is_empty():
-		printerr("Failed to merge in all the tiles!")
+	var i = 0
+	while i < len(toMerge):
+		var merged = false
+		for j in range(i+1, len(toMerge)):
+			if j == i:
+				continue
+			var merge = Geometry2D.merge_polygons(toMerge[i], toMerge[j])
+			if merge.size() == 1:
+				toMerge[i] = merge[0]
+				toMerge.remove_at(j)
+				merged = true
+				break
+		if not merged:
+			i += 1
 
-	var coll = CollisionPolygon2D.new()
-	coll.polygon = outPoly
-	coll.name = "Collisions"
-	add_child(coll)
-
-func merge_poly_array_to(merged : PackedVector2Array, toMerge: Array) -> PackedVector2Array:
-	for tilePoly in toMerge:
-		var merge_results = Geometry2D.merge_polygons(merged, tilePoly)
-		if merge_results.size() == 1:
-			merged = merge_results[0]
-			toMerge.erase(tilePoly)
-	return merged
+	for poly in toMerge:
+		var coll = CollisionPolygon2D.new()
+		coll.polygon = poly
+		add_child(coll)
 
 func get_tile_poly(x, y) -> PackedVector2Array:
 	var tl = Vector2(x,   y)   * 16

@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://ddtexobqogmst"]
+
+[ext_resource type="Script" uid="uid://c1lmjrh4mkv4c" path="res://collect.gd" id="1_5c8du"]
+[ext_resource type="Shader" uid="uid://d2g06mw6eeycg" path="res://outline.gdshader" id="2_fyu1m"]
+[ext_resource type="Texture2D" uid="uid://crlx114upnysu" path="res://assets/decor.png" id="3_2idk4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wkp8b"]
+shader = ExtResource("2_fyu1m")
+
+[node name="Rock" type="Area2D"]
+script = ExtResource("1_5c8du")
+item = "rock"
+hide = true
+
+[node name="Img" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_wkp8b")
+instance_shader_parameters/tint_colour = Color(0, 0, 0, 0)
+texture = ExtResource("3_2idk4")
+region_enabled = true
+region_rect = Rect2(64, 0, 16, 16)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-8, 0, -8, 5, 2, 8, 8, 4, 8, -1, 2, -8, -3, -8)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

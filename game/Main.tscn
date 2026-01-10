@@ -1,20 +1,22 @@
-[gd_scene load_steps=29 format=3 uid="uid://bhnednmpbc5cx"]
+[gd_scene load_steps=33 format=3 uid="uid://bhnednmpbc5cx"]
 
-[ext_resource type="Texture2D" uid="uid://u2axh15ykh4q" path="res://assets/tileset.png" id="1_uu6xs"]
+[ext_resource type="PackedScene" uid="uid://cjs0fxvnmlt2c" path="res://prefabs/cloud_bg.tscn" id="1_03owx"]
 [ext_resource type="Script" uid="uid://c0ynf81rkfbyt" path="res://player.gd" id="3_cm0pq"]
+[ext_resource type="PackedScene" uid="uid://ddtexobqogmst" path="res://prefabs/collects/rock.tscn" id="3_wkp8b"]
+[ext_resource type="PackedScene" uid="uid://bwg00p42inp34" path="res://prefabs/collects/rock2.tscn" id="4_20pc6"]
 [ext_resource type="Texture2D" uid="uid://dpgiaf1dx7oxb" path="res://assets/player.png" id="4_fos0i"]
-[ext_resource type="Texture2D" uid="uid://crlx114upnysu" path="res://assets/decor.png" id="4_lgr22"]
 [ext_resource type="Shader" uid="uid://d2g06mw6eeycg" path="res://outline.gdshader" id="5_03owx"]
+[ext_resource type="PackedScene" uid="uid://cj1524yguib8j" path="res://prefabs/collects/stick.tscn" id="5_5vvyt"]
 [ext_resource type="Script" uid="uid://knrt8ut8vw04" path="res://map.gd" id="5_fos0i"]
-[ext_resource type="Script" uid="uid://c1lmjrh4mkv4c" path="res://collect.gd" id="5_trn2v"]
+[ext_resource type="PackedScene" uid="uid://4u7fjqwcm2tf" path="res://prefabs/collects/stick2.tscn" id="6_c6i3y"]
+[ext_resource type="PackedScene" uid="uid://buag700fo4xnp" path="res://prefabs/collects/tree.tscn" id="7_c2ibq"]
+[ext_resource type="PackedScene" uid="uid://b6qsqrcy3eklt" path="res://prefabs/collects/grass.tscn" id="8_j4qnp"]
 [ext_resource type="Texture2D" uid="uid://wfu8t1vn67h0" path="res://assets/gui.png" id="8_trn2v"]
+[ext_resource type="PackedScene" uid="uid://410051lt2c8m" path="res://prefabs/collects/lilypad.tscn" id="9_sc1dx"]
 [ext_resource type="Script" uid="uid://bpfh1gnb20nrk" path="res://hotbar.gd" id="9_wkp8b"]
 [ext_resource type="Script" uid="uid://bjuuacgamcya3" path="res://inventory.gd" id="10_wkp8b"]
 [ext_resource type="FontFile" uid="uid://cutg4kqshyvvf" path="res://font.ttf" id="11_5vvyt"]
 [ext_resource type="Texture2D" uid="uid://45aidkviyjlx" path="res://assets/items.png" id="11_20pc6"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wkp8b"]
-shader = ExtResource("5_03owx")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3dxm6"]
 atlas = ExtResource("4_fos0i")
@@ -107,166 +109,52 @@ shader = ExtResource("5_03owx")
 atlas = ExtResource("11_20pc6")
 region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_c2ibq"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_kjvhd"]
 atlas = ExtResource("8_trn2v")
 region = Rect2(0, 0, 20, 20)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_j4qnp"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_5tuhn"]
 atlas = ExtResource("8_trn2v")
 region = Rect2(0, 0, 20, 20)
 
-[node name="Node2D" type="Node2D"]
+[node name="World" type="Node2D"]
 
-[node name="CloudBg" type="Parallax2D" parent="."]
-z_index = -2
-repeat_size = Vector2(32, 32)
-repeat_times = 25
-
-[node name="Sprite2D" type="Sprite2D" parent="CloudBg"]
-texture = ExtResource("1_uu6xs")
-region_enabled = true
-region_rect = Rect2(0, 0, 32, 32)
+[node name="CloudBg" parent="." instance=ExtResource("1_03owx")]
 
 [node name="Map" type="StaticBody2D" parent="."]
 script = ExtResource("5_fos0i")
 level_name = "Level_0"
 metadata/_custom_type_script = "uid://knrt8ut8vw04"
 
-[node name="Rock" type="Area2D" parent="Map"]
+[node name="Rock" parent="Map" instance=ExtResource("3_wkp8b")]
 position = Vector2(49, 87)
-script = ExtResource("5_trn2v")
-item = "rock"
-hide = true
 
-[node name="Img" type="Sprite2D" parent="Map/Rock"]
-material = SubResource("ShaderMaterial_wkp8b")
-instance_shader_parameters/tint_colour = Color(0, 0, 0, 0)
-texture = ExtResource("4_lgr22")
-region_enabled = true
-region_rect = Rect2(64, 0, 16, 16)
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/Rock"]
-polygon = PackedVector2Array(-8, 0, -8, 5, 0, 8, 4, 8, 8, 4, 8, -1, 2, -8, -3, -8)
-
-[node name="Rock2" type="Area2D" parent="Map"]
+[node name="Rock2" parent="Map" instance=ExtResource("4_20pc6")]
 position = Vector2(60, 54)
-script = ExtResource("5_trn2v")
-item = "rock"
-hide = true
 
-[node name="Img" type="Sprite2D" parent="Map/Rock2"]
-material = SubResource("ShaderMaterial_wkp8b")
-texture = ExtResource("4_lgr22")
-region_enabled = true
-region_rect = Rect2(80, 0, 16, 16)
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/Rock2"]
-polygon = PackedVector2Array(-2, -6, -7, 1, -8, 5, -3, 8, 3, 8, 8, 3, 5, -6, 2, -8)
-
-[node name="Stick" type="Area2D" parent="Map"]
+[node name="Stick" parent="Map" instance=ExtResource("5_5vvyt")]
 position = Vector2(147, 70)
-script = ExtResource("5_trn2v")
-item = "stick"
-hide = true
 
-[node name="Img" type="Sprite2D" parent="Map/Stick"]
-material = SubResource("ShaderMaterial_wkp8b")
-texture = ExtResource("4_lgr22")
-region_enabled = true
-region_rect = Rect2(112, 0, 16, 16)
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/Stick"]
-polygon = PackedVector2Array(2, -4, -7, 0, -6, 4, 0, 3, 1, 6, 3, 6, 5, 4, 4, 1, 7, -1, 7, -3)
-
-[node name="Stick2" type="Area2D" parent="Map"]
+[node name="Stick2" parent="Map" instance=ExtResource("6_c6i3y")]
 position = Vector2(168, 51)
-script = ExtResource("5_trn2v")
-item = "stick"
-hide = true
 
-[node name="Img" type="Sprite2D" parent="Map/Stick2"]
-material = SubResource("ShaderMaterial_wkp8b")
-texture = ExtResource("4_lgr22")
-region_enabled = true
-region_rect = Rect2(112, 16, 16, 16)
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/Stick2"]
-polygon = PackedVector2Array(1, -5, -1, 0, -7, 3, -6, 6, -2, 4, 1, 6, 4, 5, 3, 2, 7, -2, 5, -4, 3, -3)
-
-[node name="Stick3" type="Area2D" parent="Map"]
-position = Vector2(128, 155)
-script = ExtResource("5_trn2v")
-item = "stick"
-hide = true
-
-[node name="Img" type="Sprite2D" parent="Map/Stick3"]
-material = SubResource("ShaderMaterial_wkp8b")
-texture = ExtResource("4_lgr22")
-region_enabled = true
-region_rect = Rect2(112, 16, 16, 16)
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/Stick3"]
-polygon = PackedVector2Array(1, -5, -1, 0, -7, 3, -6, 6, -2, 4, 1, 6, 4, 5, 3, 2, 7, -2, 5, -4, 3, -3)
-
-[node name="Tree" type="Area2D" parent="Map"]
+[node name="Tree" parent="Map" instance=ExtResource("7_c2ibq")]
 position = Vector2(121, 36)
-script = ExtResource("5_trn2v")
-item = "apple"
 
-[node name="Img" type="Sprite2D" parent="Map/Tree"]
-material = SubResource("ShaderMaterial_wkp8b")
-texture = ExtResource("4_lgr22")
-region_enabled = true
-region_rect = Rect2(0, 0, 32, 32)
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/Tree"]
-position = Vector2(2, 0)
-polygon = PackedVector2Array(1, -16, -7, -15, -13, -9, -13, -2, -6, 4, -9, 7, -9, 12, -14, 16, 8, 16, 4, 7, 14, -4, 14, -8, 9, -13)
-
-[node name="Grass" type="Area2D" parent="Map"]
+[node name="Grass" parent="Map" instance=ExtResource("8_j4qnp")]
 position = Vector2(183, 82)
-script = ExtResource("5_trn2v")
-item = "grass"
-hide = true
 
-[node name="Img" type="Sprite2D" parent="Map/Grass"]
-material = SubResource("ShaderMaterial_wkp8b")
-texture = ExtResource("4_lgr22")
-region_enabled = true
-region_rect = Rect2(96, 0, 16, 16)
+[node name="Grass2" parent="Map" instance=ExtResource("8_j4qnp")]
+position = Vector2(199, 114)
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/Grass"]
-polygon = PackedVector2Array(5, -6, -7, -4, -6, 2, -3, 6, 3, 6, 6, 4)
+[node name="Grass3" parent="Map" instance=ExtResource("8_j4qnp")]
+position = Vector2(170, 156)
 
-[node name="Grass2" type="Area2D" parent="Map"]
-position = Vector2(89, 132)
-script = ExtResource("5_trn2v")
-item = "grass"
-hide = true
+[node name="Stick3" parent="Map" instance=ExtResource("6_c6i3y")]
+position = Vector2(105, 149)
 
-[node name="Img" type="Sprite2D" parent="Map/Grass2"]
-material = SubResource("ShaderMaterial_wkp8b")
-texture = ExtResource("4_lgr22")
-region_enabled = true
-region_rect = Rect2(96, 0, 16, 16)
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/Grass2"]
-polygon = PackedVector2Array(5, -6, -7, -4, -6, 2, -3, 6, 3, 6, 6, 4)
-
-[node name="Grass3" type="Area2D" parent="Map"]
-position = Vector2(183, 134)
-script = ExtResource("5_trn2v")
-item = "grass"
-hide = true
-
-[node name="Img" type="Sprite2D" parent="Map/Grass3"]
-material = SubResource("ShaderMaterial_wkp8b")
-texture = ExtResource("4_lgr22")
-region_enabled = true
-region_rect = Rect2(96, 0, 16, 16)
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/Grass3"]
-polygon = PackedVector2Array(5, -6, -7, -4, -6, 2, -3, 6, 3, 6, 6, 4)
+[node name="Lilypad" parent="Map" instance=ExtResource("9_sc1dx")]
+position = Vector2(119, 87)
 
 [node name="Player" type="CharacterBody2D" parent="."]
 unique_name_in_owner = true
@@ -396,38 +284,21 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Hotbar" type="TextureRect" parent="Player/Camera2D/HotbarContainer"]
+visible = false
 layout_mode = 0
 offset_left = -26.0
 offset_top = -20.0
 offset_right = -6.0
-texture = SubResource("AtlasTexture_c2ibq")
+texture = SubResource("AtlasTexture_kjvhd")
 script = ExtResource("9_wkp8b")
 metadata/_custom_type_script = "uid://bpfh1gnb20nrk"
 
 [node name="Hotbar2" type="TextureRect" parent="Player/Camera2D/HotbarContainer"]
+visible = false
 layout_mode = 0
 offset_left = 6.0
 offset_top = -20.0
 offset_right = 26.0
-texture = SubResource("AtlasTexture_j4qnp")
+texture = SubResource("AtlasTexture_5tuhn")
 script = ExtResource("9_wkp8b")
 metadata/_custom_type_script = "uid://bpfh1gnb20nrk"
-
-[connection signal="body_entered" from="Map/Rock" to="Map/Rock" method="_on_body_entered"]
-[connection signal="body_exited" from="Map/Rock" to="Map/Rock" method="_on_body_exited"]
-[connection signal="body_entered" from="Map/Rock2" to="Map/Rock2" method="_on_body_entered"]
-[connection signal="body_exited" from="Map/Rock2" to="Map/Rock2" method="_on_body_exited"]
-[connection signal="body_entered" from="Map/Stick" to="Map/Stick" method="_on_body_entered"]
-[connection signal="body_exited" from="Map/Stick" to="Map/Stick" method="_on_body_exited"]
-[connection signal="body_entered" from="Map/Stick2" to="Map/Stick2" method="_on_body_entered"]
-[connection signal="body_exited" from="Map/Stick2" to="Map/Stick2" method="_on_body_exited"]
-[connection signal="body_entered" from="Map/Stick3" to="Map/Stick3" method="_on_body_entered"]
-[connection signal="body_exited" from="Map/Stick3" to="Map/Stick3" method="_on_body_exited"]
-[connection signal="body_entered" from="Map/Tree" to="Map/Tree" method="_on_body_entered"]
-[connection signal="body_exited" from="Map/Tree" to="Map/Tree" method="_on_body_exited"]
-[connection signal="body_entered" from="Map/Grass" to="Map/Grass" method="_on_body_entered"]
-[connection signal="body_exited" from="Map/Grass" to="Map/Grass" method="_on_body_exited"]
-[connection signal="body_entered" from="Map/Grass2" to="Map/Grass2" method="_on_body_entered"]
-[connection signal="body_exited" from="Map/Grass2" to="Map/Grass2" method="_on_body_exited"]
-[connection signal="body_entered" from="Map/Grass3" to="Map/Grass3" method="_on_body_entered"]
-[connection signal="body_exited" from="Map/Grass3" to="Map/Grass3" method="_on_body_exited"]

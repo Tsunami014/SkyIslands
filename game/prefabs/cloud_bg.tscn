@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://cjs0fxvnmlt2c"]
+
+[ext_resource type="Texture2D" uid="uid://u2axh15ykh4q" path="res://assets/tileset.png" id="1_ocicv"]
+
+[node name="CloudBg" type="Parallax2D"]
+z_index = -2
+repeat_size = Vector2(32, 32)
+repeat_times = 25
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_ocicv")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 32)

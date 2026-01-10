@@ -32,6 +32,7 @@
         "shape": [
             "all",
             "prefix",
+            "set=misshapen",
             "addtile"
         ],
         "material": [
@@ -102,6 +103,7 @@
                 "name": [ "$:3,", ">" ]
             },
             "output": {
+                "shape": "misshapen",
                 "name": "mess",
                 "tile": "mess",
                 "desc": "What happens when you combine too much stuff"
@@ -118,6 +120,7 @@
         "grass": { "type": "resource",
             "interest": 0,
             "desc": "A tuft of grass",
+            "food": 1,
             "thickness": 0
         },
         "stick": { "type": "resource",
@@ -129,9 +132,14 @@
         "rock": { "type": "resource",
             "interest": 2,
             "desc": "A simple rock found on the ground",
-            "shape": "misshapen",
             "material": "stone",
             "thickness": 2
+        },
+        "lilypad": { "type": "resource",
+            "interest": 1,
+            "desc": "A lilypad, floating on the water",
+            "food": 1,
+            "colour": "green"
         },
         "board": { "type": "resource",
             "interest": 3,
@@ -146,25 +154,26 @@
         }
     },
     "tiles": {
-        "null":  [0, 0],
-        "mess":  [1, 0],
+        "null":   [0, 0],
+        "mess":   [1, 0],
 
-        "apple": [2, 0],
-        "rock":  [3, 0],
-        "grass": [4, 0],
-        "stick": [5, 0],
+        "apple":  [2, 0],
+        "rock":   [3, 0],
+        "grass":  [4, 0],
+        "stick":  [5, 0],
+        "lilypad":[6, 0],
 
-        "raft":  [0, 1],
-        "spear": [1, 1],
-        "rod":   [2, 1],
-        "rope":  [3, 1],
+        "raft":   [0, 1],
+        "spear":  [1, 1],
+        "rod":    [2, 1],
+        "rope":   [3, 1],
 
-        "box":   [0, 2]
+        "box":    [0, 2]
     },
     "colours": {
         "orange": "#EBA955",
-        "yellow": "#EFDF55",
+        "green":  "#88FF9F",
         "wooden": "#653F2D",
-        "stone": "#777777"
+        "stone":  "#777777"
     }
 }
