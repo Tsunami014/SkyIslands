@@ -157,6 +157,8 @@ func merge(its: Array[Dictionary]) -> Dictionary:
 						if idx != -1:
 							nam = req.substr(0, idx)
 							var part2 = req.substr(idx+1)
+							if "," not in part2:
+								part2 = part2+","+part2
 							idx = part2.find(",")
 							var lower = part2.substr(0, idx)
 							if lower != "":
@@ -178,8 +180,8 @@ func merge(its: Array[Dictionary]) -> Dictionary:
 							"%", "#":
 								curAmnt = required
 								if nam == "#":
-									if upperAmnt != "":
-										required -= int(upperAmnt)
+									if upperAmnt != -1:
+										required -= upperAmnt
 									else:
 										required = 0
 							"$":
@@ -207,6 +209,7 @@ func merge(its: Array[Dictionary]) -> Dictionary:
 				if fail:
 					break
 			if not fail:
+				xpect["name prevolance"] = 2
 				for k in r["output"]:
 					if k not in xpect:
 						var new = r["output"][k]
@@ -270,11 +273,7 @@ func merge(its: Array[Dictionary]) -> Dictionary:
 				"interest":
 					if not blnk:
 						break
-					for it in its:
-						if tag in it:
-							t = it[tag]
-						if t != null and (t is not String or t != ""):
-							break
+					t = alltags[tag][0]
 				"set":
 					if blnk: t = args
 				"setn":
@@ -299,13 +298,23 @@ func merge(its: Array[Dictionary]) -> Dictionary:
 							t += float(it)
 				"max":
 					if len(alltags[tag]) > 0:
-						if blnk:
-							t = alltags[tag][0]
+						if args != "":
+							var mx = -1
+							for it in its:
+								if tag in it and args in it:
+									if it[args] > mx:
+										t = it[tag]
+										mx = it[args]
+									elif it[args] == mx:
+										t = ""
 						else:
-							t = float(t)
-						for it in alltags[tag]:
-							if it > t:
-								t = it
+							if blnk:
+								t = alltags[tag][0]
+							else:
+								t = float(t)
+							for it in alltags[tag]:
+								if it > t:
+									t = it
 				"tint":
 					if t is String and t != "": tints.append(t)
 		out[tag] = t
