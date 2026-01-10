@@ -98,7 +98,7 @@ func merge(its: Array[Dictionary]) -> Dictionary:
 	var tileTags: Array[String] = []
 	var tints: Array[String] = []
 
-	var alltags = {}
+	var alltags: Dictionary[String, Array] = {}
 	for tag in data["tags"]:
 		alltags[tag] = []
 	for it in origIts:
@@ -171,10 +171,9 @@ func merge(its: Array[Dictionary]) -> Dictionary:
 						if curAmnt > int(upperAmnt):
 							fail = true
 							break
-				if fail:
-					break
 				if required > 0:
 					fail = true
+				if fail:
 					break
 			if not fail:
 				for k in r["output"]:
@@ -188,17 +187,30 @@ func merge(its: Array[Dictionary]) -> Dictionary:
 		var size
 		match duplicates:
 			0: size = ""
-			1: size = "long"
-			2: size = "big"
-			3: size = "large"
-			4: size = "huge"
-			5: size = "enormous"
-			6: size = "gigantic"
-			7: size = "toweringly big"
+			1: size = "big"
+			2: size = "large"
+			3: size = "huge"
+			4: size = "enormous"
+			5: size = "gigantic"
+			6: size = "toweringly big"
 			_: size = "astronomically huge"
 		out["size"] = size
 	else:
 		out["size"] = ""
+
+	var alls = {}
+	for tag in alltags:
+		var val = null
+		for i in alltags[tag]:
+			if i == null or (i is String and i == ""):
+				pass
+			elif val == null:
+				val = i
+			elif typeof(i) != typeof(val) or i != val:
+				val = null
+				break
+		if val != null:
+			alls[tag] = val
 
 	for tag in data["tags"]:
 		var t = out[tag] if tag in out else ""
@@ -216,21 +228,8 @@ func merge(its: Array[Dictionary]) -> Dictionary:
 			# This is where tag combining happens
 			match instr:
 				"all":
-					if not blnk:
-						break
-					var val = null
-					for it in its:
-						if tag in it:
-							var i = it[tag]
-							if i == null or (i is String and i == ""):
-								pass
-							elif val == null:
-								val = i
-							elif typeof(i) != typeof(val) or i != val:
-								val = null
-								break
-					if val != null:
-						t = val
+					if blnk and alls.has(tag):
+						t = alls[tag]
 				"interest":
 					if not blnk:
 						break
@@ -261,19 +260,40 @@ func merge(its: Array[Dictionary]) -> Dictionary:
 						t = 0
 						for it in alltags[tag]:
 							t += float(it)
-				"addtile":
-					if not blnk: tileTags.push_back(t)
+				"max":
+					if len(alltags[tag]) > 0:
+						if blnk:
+							t = alltags[tag][0]
+						else:
+							t = float(t)
+						for it in alltags[tag]:
+							if it > t:
+								t = it
 				"tint":
 					if t is String and t != "": tints.append(t)
 		out[tag] = t
 
 	for x in xpect:
-		out[x] = xpect[x]
-	for i in out:
-		if i not in xpect:
-			var dat = data["tags"][i]
-			if "prefix" in dat:
-				nameTags.push_back(out[i])
+		if x[0] == "_":
+			out[x.substr(1)] = xpect[x]
+		else:
+			out[x] = xpect[x]
+	if len(origIts) > 1:
+		for t in out:
+			if t in xpect or t not in data["tags"]:
+				continue
+			var success = t not in alls or alls[t] != out[t]
+			if not success:
+				for it in its:
+					if (not it.has(t)) or it[t] == null or (it[t] is String and it[t] == ""):
+						success = true
+						break
+			if success:
+				var dat = data["tags"][t]
+				if "prefix" in dat:
+					nameTags.push_back(out[t])
+				if "addtile" in dat:
+					tileTags.push_back(out[t])
 
 	var realname
 	if len(nameTags) == 0:

@@ -26,6 +26,7 @@ Every tag also has the property where if there is only one item to be combined, 
 - `set=<value>`: The property value when combined will be `"<value>"` (string) (if unset)
     - `setn=<value>`: Set, but set to this number (not string)
 - `add`: The property values will be converted to numbers and added together to get the final result (overrides existing) (only happens when more than 1 property value exists in the first place)
+- `max`: The property value that is the largest will be set (overrides: the existing one will be compared against too)
 
 ## Special tags
 These are always present in every item

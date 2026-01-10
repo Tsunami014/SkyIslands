@@ -139,7 +139,7 @@ position = Vector2(147, 70)
 position = Vector2(168, 51)
 
 [node name="Tree" parent="Map" instance=ExtResource("7_c2ibq")]
-position = Vector2(121, 36)
+position = Vector2(123, 25)
 
 [node name="Grass" parent="Map" instance=ExtResource("8_j4qnp")]
 position = Vector2(183, 82)
