@@ -56,9 +56,13 @@ func sortInteresting(a, b) -> bool:
 	if diff != 0:
 		return diff > 0
 
-	var diff2 = a["interest"] - b["interest"]
+	var diff2 = a["name prevolance"] - b["name prevolance"]
 	if diff2 != 0:
 		return diff2 > 0
+
+	var diff3 = a["interest"] - b["interest"]
+	if diff3 != 0:
+		return diff3 > 0
 
 	return a["name"] < b["name"]
 

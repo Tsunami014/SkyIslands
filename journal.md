@@ -42,3 +42,9 @@
 
 ![The coolest screenshot yet](./journalPics/d6.png)
 
+# 10/1/25
+- Added more items to merge and more recipies and fixed merging bugs and slightly reworked some merging stuff and yay!
+    - Added more pictures of things to merge and stuff! The timer says in total I have spent 1:16:59 on items and 58:44 on decor (tbf, I did add more than double what was already there)
+
+![Now this one's funny *and* cool!](./journalPics/d7.png)
+
